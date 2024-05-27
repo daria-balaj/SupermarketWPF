@@ -13,6 +13,15 @@
         <local:AdminPageVM/>
     </Page.DataContext>
 
+    <Page.Resources>
+        <Style TargetType="Label">
+            <Setter Property="Foreground" Value="White"></Setter>
+            <Setter Property="FontFamily" Value="Courier New"></Setter>
+            <Setter Property="FontSize" Value="28"/>
+        </Style>
+    </Page.Resources>
+
+
     <Grid HorizontalAlignment="Stretch">
         <TabControl Width="1870">
             <TabItem Header="Users">
@@ -49,113 +58,129 @@
                     <TabItem Header="View">
                         <StackPanel Orientation="Horizontal">
                             <DataGrid Name="ViewStockslistBox" ItemsSource="{Binding StockList}" Width="1200" MaxHeight="900" SelectionMode="Single" FontSize="14" SelectionChanged="listBox_SelectionChanged"/>
-                            <Grid VerticalAlignment="Center" Margin="80 0 0 0">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto" MinWidth="200" />
-                                    <ColumnDefinition />
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="70" />
-                                    <RowDefinition Height="70" />
-                                    <RowDefinition Height="70" />
-                                    <RowDefinition Height="70" />
-                                    <RowDefinition Height="70" />
-                                    <RowDefinition Height="70" />
-                                    <RowDefinition Height="70" />
-                                    <RowDefinition Height="70" />
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="70" />
-                                </Grid.RowDefinitions>
 
-                                <!-- ID -->
-                                <Label Content="ID:" VerticalContentAlignment="Center"/>
-                                <TextBox Grid.Row="0" Grid.Column="1" Width="150" Margin="10,10,10,10" Text="{Binding StockID}" />
-
-                                <!-- ProductID -->
-                                <Label Grid.Row="1" Content="Product ID:" Height="25" Width="150"/>
-                                <TextBox Grid.Row="1" Grid.Column="1"  Margin="10,10,10,10" Text="{Binding StockProductID}" />
-
-                                <!-- Measurement -->
-                                <Label Grid.Row="2" Content="Measurement:" Height="25" Width="150"/>
-                                <TextBox Grid.Row="2" Grid.Column="1" Width="NaN" Margin="10,10,10,10" Text="{Binding StockMeasurement}" />
-
-                                <!-- RestockDate -->
-                                <Label Grid.Row="3" Content="Restock Date:" Height="25" Width="150"/>
-                                <DatePicker Grid.Row="3" Grid.Column="1" Margin="10,10,10,10" SelectedDate="{Binding StockRestockDate}" />
-
-                                <!-- ExpirationDate -->
-                                <Label Grid.Row="4" Content="Expiration Date:" Height="25" Width="150"/>
-                                <DatePicker Grid.Row="4" Grid.Column="1" Margin="10,10,10,10" SelectedDate="{Binding StockExpirationDate}" />
-
-                                <!-- BuyingPrice -->
-                                <Label Grid.Row="5" Content="Buying Price:" Height="25" Width="150"/>
-                                <TextBox Grid.Row="5" Grid.Column="1" Width="NaN" Margin="10,10,10,10" Text="{Binding StockBuyingPrice}" />
-
-                                <!-- SellingPrice -->
-                                <Label Grid.Row="6" Content="Selling Price:" Height="25" Width="150"/>
-                                <TextBox Grid.Row="6" Grid.Column="1" Width="NaN" Margin="10,10,10,10" Text="{Binding StockSellingPrice}" />
-
-                                <!-- Add Stock Button -->
-                                <Button Grid.Row="7" Grid.Column="1" Content="Add Stock" Command="{Binding AddStockCommand}" Width="100" Margin="0,10,0,10" HorizontalAlignment="Center" />
-                            </Grid>
                         </StackPanel>
                     </TabItem>
                     <TabItem Header="Add">
-                        <StackPanel>
-                            <Grid>
+                        <StackPanel Orientation="Horizontal" Width="1800">
+                            <StackPanel Orientation="Vertical" HorizontalAlignment="Left" Width="650" Margin="80 0 0 0">
+                                <Label Foreground="white" Margin="30 90 0 0" Height="40" VerticalAlignment="Top" FontSize="30">Search for products by:</Label>
+                                <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Height="400" Margin="0 10 0 0" >
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="65px"/>
+                                        <RowDefinition Height="65px"/>
+                                        <RowDefinition Height="65px"/>
+                                        <RowDefinition Height="65px"/>
+                                        <RowDefinition Height="65px"/>
+                                        <RowDefinition Height="65px"/>
+
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="250"/>
+                                        <ColumnDefinition Width="220"/>
+                                        <ColumnDefinition Width="100"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <!-- Row 0: ID -->
+                                    <Label Foreground="White" FontSize="26" Grid.Row="0" Grid.Column="0">ID</Label>
+                                    <TextBox Width="150" Margin="5" Text="{Binding ProductVM.SearchID}" Grid.Row="0" Grid.Column="1"/>
+                                    <Button Content="🔎" Width="Auto" Height="auto" Background="#FF499A49" Command="{Binding ProductVM.SearchByIDCommand}" CommandParameter="{Binding ProductVM.SearchID}" Margin="5" Grid.Row="0" Grid.Column="2"/>
+
+
+                                    <!-- Row 1: Name -->
+                                    <Label Foreground="White" FontSize="26" Grid.Row="1" Grid.Column="0">Name</Label>
+                                    <TextBox Width="150" Margin="5" Text="{Binding ProductVM.SearchName}" Grid.Row="1" Grid.Column="1"/>
+                                    <Button Content="🔎" Width="Auto" Height="auto" Background="#FF499A49" Command="{Binding ProductVM.SearchByNameCommand}" CommandParameter="{Binding ProductVM.SearchName}" Margin="5" Grid.Row="1" Grid.Column="2"/>
+
+                                    <!-- Row 2: Barcode -->
+                                    <Label Foreground="White" FontSize="26" Grid.Row="2" Grid.Column="0">Barcode</Label>
+                                    <TextBox Width="150" Margin="5" Text="{Binding ProductVM.SearchBarcode}" Grid.Row="2" Grid.Column="1"/>
+                                    <Button Content="🔎" Width="Auto" Height="auto" Command="{Binding ProductVM.SearchByBarcodeCommand}" CommandParameter="{Binding ProductVM.SearchBarcode}" Margin="5" Grid.Row="2" Grid.Column="2"/>
+
+                                    <!-- Row 3: Producer -->
+                                    <Label Foreground="White" FontSize="26" Grid.Row="3" Grid.Column="0">Producer</Label>
+                                    <TextBox Width="150" Margin="5" Text="{Binding ProductVM.SearchProducer}" Grid.Row="3" Grid.Column="1"/>
+                                    <Button Content="🔎" Width="Auto" Height="auto" Background="#FF499A49" Command="{Binding ProductVM.SearchByProducerCommand}" CommandParameter="{Binding ProductVM.SearchProducer}" Margin="5" Grid.Row="3" Grid.Column="2"/>
+
+                                    <!-- Row 4: Category -->
+                                    <Label Foreground="White" FontSize="26" Grid.Row="4" Grid.Column="0">Category</Label>
+                                    <ComboBox Width="150" Margin="5" ItemsSource="{Binding  ProductVM.Categories}" DisplayMemberPath="Name" SelectedItem="{Binding ProductVM.SearchCategory}" Grid.Row="4" Grid.Column="1"/>
+                                    <Button Content="🔎" Width="Auto" Height="auto" Background="#FF499A49" Command="{Binding ProductVM.SearchByCategoryCommand}" CommandParameter="{Binding ProductVM.SearchCategory}" Margin="5" Grid.Row="4" Grid.Column="2"/>
+
+                                    <!-- Row 5: Expiration Date -->
+                                    <Label Foreground="White" FontSize="26" Grid.Row="5" Grid.Column="0">Expiration Date</Label>
+                                    <DatePicker Width="150" Margin="5" Height="60" SelectedDate="{Binding ProductVM.SearchExpDate}" Grid.Row="5" Grid.Column="1"/>
+                                    <Button Content="🔎" Width="Auto" Height="auto" Command="{Binding ProductVM.SearchByExpDateCommand}" CommandParameter="{Binding ProductVM.SearchExpDate}" Margin="5" Grid.Row="5" Grid.Column="2"/>
+                                </Grid>
+                                <Label Foreground="White" FontSize="32" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0 40 0 0" Height="50">Search results:</Label>
+                                <DataGrid Width="650" ItemsSource="{Binding ProductVM.SearchResults}" IsReadOnly="true" AutoGenerateColumns="false" Height="200" Margin="0 20 0 0"  SelectionMode="Single" SelectedItem="{Binding ProductVM.SelectedProduct}" >
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Product" FontSize="12" Binding="{Binding ID}" Width="auto" />
+                                        <DataGridTextColumn Header="Product" FontSize="12" Binding="{Binding Name}" Width="auto" />
+                                        <DataGridTextColumn Header="Price" Binding="{Binding Price}" Width="auto" />
+                                        <DataGridTextColumn Header="Barcode" Binding="{Binding Barcode}" Width="auto" />
+                                        <DataGridTextColumn Header="Category" Binding="{Binding Category.Name}" Width="auto" />
+                                        <DataGridTextColumn Header="Producer" Binding="{Binding Producer.Name}" Width="auto" />
+                                        <DataGridTextColumn Header="Expiration Date" Binding="{Binding ExpirationDate}" Width="auto" />
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                                <Button Command="{Binding AddToReceiptCommand}" Content="Add Item" FontSize="30" Width="180" Height="70" Margin="0 30 0 0" Click="Button_Click" ></Button>
+
+                            </StackPanel>
+                            <Grid VerticalAlignment="Center" Margin="280 0 0 0">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" MinWidth="230" />
+                                    <ColumnDefinition />
                                 </Grid.ColumnDefinitions>
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
+                                    
+                                    <RowDefinition Height="70" />
+                                    <RowDefinition Height="70" />
+                                    <RowDefinition Height="70" />
+                                    <RowDefinition Height="70" />
+                                    <RowDefinition Height="70" />
+                                    <RowDefinition Height="70" />
+                                    <RowDefinition Height="70" />
+                                    <RowDefinition Height="80" />
                                 </Grid.RowDefinitions>
 
-                                <!-- ID -->
-                                <Label Grid.Row="0" Grid.Column="0" Content="ID:" VerticalAlignment="Center" Margin="10"/>
-                                <TextBox Grid.Row="0" Grid.Column="1" Width="200" Margin="10" Text="{Binding StockID}" />
 
                                 <!-- ProductID -->
-                                <Label Grid.Row="1" Grid.Column="0" Content="Product ID:" VerticalAlignment="Center" Margin="10"/>
-                                <TextBox Grid.Row="1" Grid.Column="1" Width="200" Margin="10" Text="{Binding StockProductID}" />
+                                <Label Grid.Row="0" Content="Product ID:" />
+                                <TextBox Grid.Row="0" Grid.Column="1"  Width="180" Margin="10,10,10,10" Text="{Binding ProductVM.SelectedProduct.ID}" />
+
+                                <!-- ProductQuantity -->
+                                <Label Grid.Row="1" Content="Quantity:" />
+                                <TextBox Grid.Row="1" Grid.Column="1" Width="70" Margin="10,10,10,10" Text="{Binding StockQuantity}" />
 
                                 <!-- Measurement -->
-                                <Label Grid.Row="2" Grid.Column="0" Content="Measurement:" VerticalAlignment="Center" Margin="10"/>
-                                <TextBox Grid.Row="2" Grid.Column="1" Width="200" Margin="10" Text="{Binding StockMeasurement}" />
+                                <Label Grid.Row="2" Content="Measurement:" />
+                                <TextBox Grid.Row="2" Grid.Column="1" Width="180" Margin="10,10,10,10" Text="{Binding StockMeasurement}" />
 
                                 <!-- RestockDate -->
-                                <Label Grid.Row="3" Grid.Column="0" Content="Restock Date:" VerticalAlignment="Center" Margin="10"/>
-                                <DatePicker Grid.Row="3" Grid.Column="1" Width="200" Margin="10" SelectedDate="{Binding StockRestockDate}" />
+                                <Label Grid.Row="3" Content="Restock Date:"/>
+                                <DatePicker Grid.Row="3" Grid.Column="1" Margin="10,10,10,10" SelectedDate="{Binding StockRestockDate}" />
 
                                 <!-- ExpirationDate -->
-                                <Label Grid.Row="4" Grid.Column="0" Content="Expiration Date:" VerticalAlignment="Center" Margin="10"/>
-                                <DatePicker Grid.Row="4" Grid.Column="1" Width="200" Margin="10" SelectedDate="{Binding StockExpirationDate}" />
+                                <Label Grid.Row="4" Content="Expiration Date:" />
+                                <DatePicker Grid.Row="4" Grid.Column="1" Margin="10,10,10,10" SelectedDate="{Binding StockExpirationDate}" />
 
                                 <!-- BuyingPrice -->
-                                <Label Grid.Row="5" Grid.Column="0" Content="Buying Price:" VerticalAlignment="Center" Margin="10"/>
-                                <TextBox Grid.Row="5" Grid.Column="1" Width="200" Margin="10" Text="{Binding StockBuyingPrice}" />
+                                <Label Grid.Row="5" Content="Buying Price:"/>
+                                <TextBox Grid.Row="5" Grid.Column="1" Width="180" Margin="10,10,10,10" Text="{Binding StockBuyingPrice}" />
 
                                 <!-- SellingPrice -->
-                                <Label Grid.Row="6" Grid.Column="0" Content="Selling Price:" VerticalAlignment="Center" Margin="10"/>
-                                <TextBox Grid.Row="6" Grid.Column="1" Width="200" Margin="10" Text="{Binding StockSellingPrice}" />
+                                <Label Grid.Row="6" Content="Selling Price:"/>
+                                <TextBlock HorizontalAlignment="Right"  Grid.Row="6" Grid.Column="1" Width="NaN" Foreground="White" FontSize="28" Margin="10,10,50,10" ><Run Text="{Binding StockSellingPrice}" /><Run Text=" "/><Run Text=" lei"/></TextBlock>
 
                                 <!-- Add Stock Button -->
-                                <Button Grid.Row="7" Grid.Column="1" Content="Add Stock" Command="{Binding AddStockCommand}" Width="100" Margin="10" HorizontalAlignment="Center" />
+                                <Button Grid.Row="7" Grid.Column="1" Width="170" Content="Add Stock" Command="{Binding AddStockCommand}" Margin="0,10,0,10" HorizontalAlignment="Center" />
                             </Grid>
                         </StackPanel>
                     </TabItem>
 
                     <!-- TabItem for Modifying -->
-                    <TabItem Header="Modify">
+                    <TabItem Header="Modify" Margin="2,0,2,2" VerticalAlignment="Bottom">
                         <StackPanel>
                             <TextBlock Text="Modify Content" Padding="10"/>
                         </StackPanel>

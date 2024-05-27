@@ -72,37 +72,37 @@
 
                 <!-- Row 0: ID -->
                 <Label Foreground="White" FontSize="26" Grid.Row="0" Grid.Column="0">ID</Label>
-                <TextBox Width="150" Margin="5" Text="{Binding SearchID}" Grid.Row="0" Grid.Column="1"/>
-                <Button Content="🔎" Width="50" Command="{Binding SearchByIDCommand}" CommandParameter="{Binding SearchID}" Margin="5" Grid.Row="0" Grid.Column="2"/>
+                <TextBox Width="150" Margin="5" Text="{Binding ProductVM.SearchID}" Grid.Row="0" Grid.Column="1"/>
+                <Button Content="🔎" Width="50" Command="{Binding ProductVM.SearchByIDCommand}" CommandParameter="{Binding ProductVM.SearchID}" Margin="5" Grid.Row="0" Grid.Column="2"/>
 
 
                 <!-- Row 1: Name -->
                 <Label Foreground="White" FontSize="26" Grid.Row="1" Grid.Column="0">Name</Label>
-                <TextBox Width="150" Margin="5" Text="{Binding SearchName}" Grid.Row="1" Grid.Column="1"/>
-                <Button Content="🔎" Width="50" Command="{Binding SearchByNameCommand}" CommandParameter="{Binding SearchName}" Margin="5" Grid.Row="1" Grid.Column="2"/>
+                <TextBox Width="150" Margin="5" Text="{Binding ProductVM.SearchName}" Grid.Row="1" Grid.Column="1"/>
+                <Button Content="🔎" Width="50" Command="{Binding ProductVM.SearchByNameCommand}" CommandParameter="{Binding ProductVM.SearchName}" Margin="5" Grid.Row="1" Grid.Column="2"/>
 
                 <!-- Row 2: Barcode -->
                 <Label Foreground="White" FontSize="26" Grid.Row="2" Grid.Column="0">Barcode</Label>
-                <TextBox Width="150" Margin="5" Text="{Binding SearchBarcode}" Grid.Row="2" Grid.Column="1"/>
-                <Button Content="🔎" Width="50" Command="{Binding SearchByBarcodeCommand}" CommandParameter="{Binding SearchBarcode}" Margin="5" Grid.Row="2" Grid.Column="2"/>
+                <TextBox Width="150" Margin="5" Text="{Binding ProductVM.SearchBarcode}" Grid.Row="2" Grid.Column="1"/>
+                <Button Content="🔎" Width="50" Command="{Binding ProductVM.SearchByBarcodeCommand}" CommandParameter="{Binding ProductVM.SearchBarcode}" Margin="5" Grid.Row="2" Grid.Column="2"/>
 
                 <!-- Row 3: Producer -->
                 <Label Foreground="White" FontSize="26" Grid.Row="3" Grid.Column="0">Producer</Label>
-                <TextBox Width="150" Margin="5" Text="{Binding SearchProducer}" Grid.Row="3" Grid.Column="1"/>
-                <Button Content="🔎" Width="50" Command="{Binding SearchByProducerCommand}" CommandParameter="{Binding SearchProducer}" Margin="5" Grid.Row="3" Grid.Column="2"/>
+                <TextBox Width="150" Margin="5" Text="{Binding ProductVM.SearchProducer}" Grid.Row="3" Grid.Column="1"/>
+                <Button Content="🔎" Width="50" Command="{Binding ProductVM.SearchByProducerCommand}" CommandParameter="{Binding ProductVM.SearchProducer}" Margin="5" Grid.Row="3" Grid.Column="2"/>
 
                 <!-- Row 4: Category -->
                 <Label Foreground="White" FontSize="26" Grid.Row="4" Grid.Column="0">Category</Label>
-                <ComboBox Width="150" Margin="5" ItemsSource="{Binding Categories}" DisplayMemberPath="Name" SelectedItem="{Binding SearchCategory}" Grid.Row="4" Grid.Column="1"/>
-                <Button Content="🔎" Width="50" Command="{Binding SearchByCategoryCommand}" CommandParameter="{Binding SearchCategory}" Margin="5" Grid.Row="4" Grid.Column="2"/>
+                <ComboBox Width="150" Margin="5" ItemsSource="{Binding  ProductVM.Categories}" DisplayMemberPath="Name" SelectedItem="{Binding ProductVM.SearchCategory}" Grid.Row="4" Grid.Column="1"/>
+                <Button Content="🔎" Width="50" Command="{Binding ProductVM.SearchByCategoryCommand}" CommandParameter="{Binding ProductVM.SearchCategory}" Margin="5" Grid.Row="4" Grid.Column="2"/>
 
                 <!-- Row 5: Expiration Date -->
                 <Label Foreground="White" FontSize="26" Grid.Row="5" Grid.Column="0">Expiration Date</Label>
-                <DatePicker Width="150" Margin="5" SelectedDate="{Binding SearchExpDate}" Grid.Row="5" Grid.Column="1"/>
-                <Button Content="🔎" Width="50" Command="{Binding SearchByExpDateCommand}" CommandParameter="{Binding SearchExpDate}" Margin="5" Grid.Row="5" Grid.Column="2"/>
+                <DatePicker Width="150" Margin="5" SelectedDate="{Binding ProductVM.SearchExpDate}" Grid.Row="5" Grid.Column="1"/>
+                <Button Content="🔎" Width="50" Command="{Binding ProductVM.SearchByExpDateCommand}" CommandParameter="{Binding ProductVM.SearchExpDate}" Margin="5" Grid.Row="5" Grid.Column="2"/>
             </Grid>
             <Label Foreground="White" FontSize="32" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0 40 0 0" Height="50">Search results:</Label>
-            <DataGrid Width="650" ItemsSource="{Binding SearchResults}" IsReadOnly="true" AutoGenerateColumns="false" Height="200" Margin="0 20 0 0"  SelectionMode="Single" SelectedItem="{Binding SelectedProduct}" >
+            <DataGrid Width="650" ItemsSource="{Binding ProductVM.SearchResults}" IsReadOnly="true" AutoGenerateColumns="false" Height="200" Margin="0 20 0 0"  SelectionMode="Single" SelectedItem="{Binding ProductVM.SelectedProduct}" >
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Product" FontSize="12" Binding="{Binding ID}" Width="auto" />
                     <DataGridTextColumn Header="Product" FontSize="12" Binding="{Binding Name}" Width="auto" />
