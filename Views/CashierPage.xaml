@@ -1,0 +1,159 @@
+﻿<Page x:Class="Supermarket.Views.CashierPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Supermarket.ViewModels"
+      mc:Ignorable="d" 
+      d:DesignHeight="1080" d:DesignWidth="1920"
+      Title="CashierPage">
+
+    <Page.DataContext>
+        <local:CashierPageVM/>
+    </Page.DataContext>
+
+    <Page.Resources>
+        <Style TargetType="Label">
+            <Setter Property="Foreground" Value="Black"></Setter>
+            <Setter Property="FontFamily" Value="Courier New"></Setter>
+        </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="Foreground" Value="Black"></Setter>
+            <Setter Property="FontFamily" Value="Courier New"></Setter>
+            <Setter Property="FontSize" Value="20"/>
+        </Style>
+        <Style TargetType="DataGridColumnHeader">
+            <Setter Property="FontFamily" Value="Courier New"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="Padding" Value="20 0"/>
+            
+        </Style>
+        <Style TargetType="DataGridCell">
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+        </Style>
+
+        <!-- Style for DataGrid rows with no borders -->
+        <Style TargetType="DataGridRow">
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+        </Style>
+
+        <!-- Style for the DataGrid with no grid lines -->
+        <Style TargetType="DataGrid">
+            <Setter Property="GridLinesVisibility" Value="None"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+        </Style>
+    </Page.Resources>
+    
+    <Grid>
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Left" Width="650" Margin="80 0 0 0">
+            <Label Foreground="white" Margin="30 90 0 0" Height="40" VerticalAlignment="Top" FontSize="30">Search for products by:</Label>
+            <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Height="350" Margin="0 10 0 0" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60px"/>
+                    <RowDefinition Height="60px"/>
+                    <RowDefinition Height="60px"/>
+                    <RowDefinition Height="60px"/>
+                    <RowDefinition Height="60px"/>
+                    <RowDefinition Height="60px"/>
+
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="250"/>
+                    <ColumnDefinition Width="220"/>
+                    <ColumnDefinition Width="90"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Row 0: ID -->
+                <Label Foreground="White" FontSize="26" Grid.Row="0" Grid.Column="0">ID</Label>
+                <TextBox Width="150" Margin="5" Text="{Binding SearchID}" Grid.Row="0" Grid.Column="1"/>
+                <Button Content="🔎" Width="50" Command="{Binding SearchByIDCommand}" CommandParameter="{Binding SearchID}" Margin="5" Grid.Row="0" Grid.Column="2"/>
+
+
+                <!-- Row 1: Name -->
+                <Label Foreground="White" FontSize="26" Grid.Row="1" Grid.Column="0">Name</Label>
+                <TextBox Width="150" Margin="5" Text="{Binding SearchName}" Grid.Row="1" Grid.Column="1"/>
+                <Button Content="🔎" Width="50" Command="{Binding SearchByNameCommand}" CommandParameter="{Binding SearchName}" Margin="5" Grid.Row="1" Grid.Column="2"/>
+
+                <!-- Row 2: Barcode -->
+                <Label Foreground="White" FontSize="26" Grid.Row="2" Grid.Column="0">Barcode</Label>
+                <TextBox Width="150" Margin="5" Text="{Binding SearchBarcode}" Grid.Row="2" Grid.Column="1"/>
+                <Button Content="🔎" Width="50" Command="{Binding SearchByBarcodeCommand}" CommandParameter="{Binding SearchBarcode}" Margin="5" Grid.Row="2" Grid.Column="2"/>
+
+                <!-- Row 3: Producer -->
+                <Label Foreground="White" FontSize="26" Grid.Row="3" Grid.Column="0">Producer</Label>
+                <TextBox Width="150" Margin="5" Text="{Binding SearchProducer}" Grid.Row="3" Grid.Column="1"/>
+                <Button Content="🔎" Width="50" Command="{Binding SearchByProducerCommand}" CommandParameter="{Binding SearchProducer}" Margin="5" Grid.Row="3" Grid.Column="2"/>
+
+                <!-- Row 4: Category -->
+                <Label Foreground="White" FontSize="26" Grid.Row="4" Grid.Column="0">Category</Label>
+                <ComboBox Width="150" Margin="5" ItemsSource="{Binding Categories}" DisplayMemberPath="Name" SelectedItem="{Binding SearchCategory}" Grid.Row="4" Grid.Column="1"/>
+                <Button Content="🔎" Width="50" Command="{Binding SearchByCategoryCommand}" CommandParameter="{Binding SearchCategory}" Margin="5" Grid.Row="4" Grid.Column="2"/>
+
+                <!-- Row 5: Expiration Date -->
+                <Label Foreground="White" FontSize="26" Grid.Row="5" Grid.Column="0">Expiration Date</Label>
+                <DatePicker Width="150" Margin="5" SelectedDate="{Binding SearchExpDate}" Grid.Row="5" Grid.Column="1"/>
+                <Button Content="🔎" Width="50" Command="{Binding SearchByExpDateCommand}" CommandParameter="{Binding SearchExpDate}" Margin="5" Grid.Row="5" Grid.Column="2"/>
+            </Grid>
+            <Label Foreground="White" FontSize="32" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0 40 0 0" Height="50">Search results:</Label>
+            <DataGrid Width="650" ItemsSource="{Binding SearchResults}" IsReadOnly="true" AutoGenerateColumns="false" Height="200" Margin="0 20 0 0"  SelectionMode="Single" SelectedItem="{Binding SelectedProduct}" >
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Product" FontSize="12" Binding="{Binding ID}" Width="auto" />
+                    <DataGridTextColumn Header="Product" FontSize="12" Binding="{Binding Name}" Width="auto" />
+                    <DataGridTextColumn Header="Price" Binding="{Binding Price}" Width="auto" />
+                    <DataGridTextColumn Header="Barcode" Binding="{Binding Barcode}" Width="auto" />
+                    <DataGridTextColumn Header="Category" Binding="{Binding Category.Name}" Width="auto" />
+                    <DataGridTextColumn Header="Producer" Binding="{Binding Producer.Name}" Width="auto" />
+                    <DataGridTextColumn Header="Expiration Date" Binding="{Binding ExpirationDate}" Width="auto" />
+                </DataGrid.Columns>
+            </DataGrid>
+            <Button Command="{Binding AddToReceiptCommand}" Content="Add Item" FontSize="30" Width="180" Height="70" Margin="0 30 0 0" ></Button>
+
+        </StackPanel>
+        <StackPanel x:Name="rightSide" Orientation="Vertical" HorizontalAlignment="Right" Width="650px" Height="880px" Margin="0 30 90 0">
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Right" Background="White" Width="550px" Height="720px" Margin="50 30">
+                    <!--<Button Content="New Receipt" Command="{Binding CreateNewReceiptCommand}" />-->
+                    <Label Margin="0 30 0 20" HorizontalAlignment="Center" FontSize="40" FontWeight="Bold">MySupermarket</Label>
+                    <TextBlock HorizontalAlignment="center" FontSize="22" Width="280" Height="100" TextWrapping="Wrap" VerticalAlignment="Center" >Str. Iuliu Maniu, nr. 50, Brasov 500091</TextBlock>
+                <!--<Label Margin="50 0" FontSize="24">Cashier:</Label>-->
+                <TextBlock Margin="50 0" FontSize="24">
+                    <Run Text="Cashier: "/>
+                    <Run Text="{Binding CurrentUser.Username}"/>
+                    <Run Text="Emitted at: "/>
+                    <!--<Run Text="{Binding }"-->
+                </TextBlock>
+                <!--<Label Content="{Binding CurrentUser.Name}" ></Label>-->
+                    <Label HorizontalAlignment="Center" FontSize="26">.................................</Label>
+                    <DataGrid Margin="25 5" MaxHeight="200" AutoGenerateColumns="False" ItemsSource="{Binding Items}">
+                    <DataGrid.RowStyle>
+                        <Style TargetType="DataGridRow">
+                            <Setter Property="Margin" Value="40,0,0,0"/>
+                        </Style>
+                    </DataGrid.RowStyle>
+
+                    <DataGrid.Columns>
+                            <DataGridTextColumn Header="Qty" Binding="{Binding Quantity}" Width="60"/>
+                            <DataGridTextColumn Header="Product" Binding="{Binding Product.Name}" Width="auto"/>
+                            <DataGridTextColumn Header="Price" Binding="{Binding Product.Price}" Width="auto" />
+                            <DataGridTextColumn Header="Subtotal" Binding="{Binding Subtotal}" Width="auto"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                <Label HorizontalAlignment="Center" FontSize="26">..................................</Label>
+
+                    <Label Content="{Binding Total}"></Label>
+                <TextBlock FontSize="30" FontWeight="Bold" Margin="35 10" HorizontalAlignment="Right">
+                    <Run Text="Total: "/>
+                    <Run Text="{Binding Total}"/>
+                </TextBlock>
+                <TextBlock FontSize="28" HorizontalAlignment="Center" FontWeight="DemiBold" Width="420" TextWrapping="Wrap" Height="100">Thank you for shopping at our local business!</TextBlock>
+                </StackPanel>
+            <Button Content="Save Receipt" Margin="40, 0" FontSize="30" VerticalAlignment="Bottom" Height="70" Command="{Binding SaveReceiptCommand}" Width="230px"/>
+        </StackPanel>
+    </Grid>
+</Page>

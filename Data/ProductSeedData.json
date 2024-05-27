@@ -1,0 +1,87 @@
+[
+  {
+    "Name": "Mineral Water",
+    "Price": 4.0,
+    "Barcode": "123456789012",
+    "Category": {
+      "Name": "Beverages"
+    },
+    "Producer": {
+      "Name": "Aquafina",
+      "Country": "USA"
+    },
+    "ExpirationDate": "2024-12-31",
+    "Discount": {
+      "Reason": "Clearance",
+      "Percentage": 10,
+      "ValidFrom": "2024-01-01",
+      "ValidUntil": "2024-12-31"
+    }
+  },
+  {
+    "Name": "Chocolate Bar",
+    "Price": 3.5,
+    "Barcode": "987654321098",
+    "Category": {
+      "Name": "Snacks"
+    },
+    "Producer": {
+      "Name": "Milka",
+      "Country": "Switzerland"
+    },
+    "ExpirationDate": "2024-06-30",
+    "Discount": {
+      "Reason": "Near Expiration",
+      "Percentage": 20,
+      "ValidFrom": "2024-06-01",
+      "ValidUntil": "2024-06-30"
+    }
+  },
+  {
+    "Name": "Pasta",
+    "Price": 2.0,
+    "Barcode": "135792468012",
+    "Category": {
+      "Name": "Food"
+    },
+    "Producer": {
+      "Name": "Barilla",
+      "Country": "Italy"
+    },
+    "ExpirationDate": "2025-01-01",
+    "Discount": null
+  },
+  {
+    "Name": "T-Shirt",
+    "Price": 15.0,
+    "Barcode": "246810121416",
+    "Category": {
+      "Name": "Clothing"
+    },
+    "Producer": {
+      "Name": "H&M",
+      "Country": "Sweden"
+    },
+    "ExpirationDate": "2026-01-01",
+    "Discount": {
+      "Reason": "Clearance",
+      "Percentage": 25,
+      "ValidFrom": "2024-05-01",
+      "ValidUntil": "2024-12-31"
+    }
+  },
+  {
+    "Name": "Notebook",
+    "Price": 3.0,
+    "Barcode": "123443219876",
+    "Category": {
+      "Name": "Stationery"
+    },
+    "Producer": {
+      "Name": "Moleskine",
+      "Country": "Italy"
+    },
+    "ExpirationDate": "2026-01-01",
+    "Discount": null
+  }
+]
