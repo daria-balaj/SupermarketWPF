@@ -62,54 +62,54 @@
                         </StackPanel>
                     </TabItem>
                     <TabItem Header="Add">
-                        <StackPanel Orientation="Horizontal" Width="1800">
+                        <StackPanel Orientation="Horizontal" Width="1500">
                             <StackPanel Orientation="Vertical" HorizontalAlignment="Left" Width="650" Margin="80 0 0 0">
-                                <Label Foreground="white" Margin="30 90 0 0" Height="40" VerticalAlignment="Top" FontSize="30">Search for products by:</Label>
-                                <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Height="400" Margin="0 10 0 0" >
+                                <Label Foreground="white" Margin="30 90 0 0" Height="40" VerticalAlignment="Top" FontSize="22">Search for products by:</Label>
+                                <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Height="350" Margin="0 10 0 0" >
                                     <Grid.RowDefinitions>
-                                        <RowDefinition Height="65px"/>
-                                        <RowDefinition Height="65px"/>
-                                        <RowDefinition Height="65px"/>
-                                        <RowDefinition Height="65px"/>
-                                        <RowDefinition Height="65px"/>
-                                        <RowDefinition Height="65px"/>
+                                        <RowDefinition Height="55px"/>
+                                        <RowDefinition Height="55px"/>
+                                        <RowDefinition Height="55px"/>
+                                        <RowDefinition Height="55px"/>
+                                        <RowDefinition Height="55px"/>
+                                        <RowDefinition Height="55px"/>
 
                                     </Grid.RowDefinitions>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="250"/>
-                                        <ColumnDefinition Width="220"/>
-                                        <ColumnDefinition Width="100"/>
+                                        <ColumnDefinition Width="180"/>
+                                        <ColumnDefinition Width="70"/>
                                     </Grid.ColumnDefinitions>
 
                                     <!-- Row 0: ID -->
-                                    <Label Foreground="White" FontSize="26" Grid.Row="0" Grid.Column="0">ID</Label>
-                                    <TextBox Width="150" Margin="5" Text="{Binding ProductVM.SearchID}" Grid.Row="0" Grid.Column="1"/>
+                                    <Label Foreground="White" FontSize="24" Grid.Row="0" Grid.Column="0">ID</Label>
+                                    <TextBox Width="100" Height="30" Margin="5" Text="{Binding ProductVM.SearchID}" Grid.Row="0" Grid.Column="1"/>
                                     <Button Content="🔎" Width="Auto" Height="auto" Background="#FF499A49" Command="{Binding ProductVM.SearchByIDCommand}" CommandParameter="{Binding ProductVM.SearchID}" Margin="5" Grid.Row="0" Grid.Column="2"/>
 
 
                                     <!-- Row 1: Name -->
                                     <Label Foreground="White" FontSize="26" Grid.Row="1" Grid.Column="0">Name</Label>
-                                    <TextBox Width="150" Margin="5" Text="{Binding ProductVM.SearchName}" Grid.Row="1" Grid.Column="1"/>
+                                    <TextBox Width="100" Height="30" Margin="5" Text="{Binding ProductVM.SearchName}" Grid.Row="1" Grid.Column="1"/>
                                     <Button Content="🔎" Width="Auto" Height="auto" Background="#FF499A49" Command="{Binding ProductVM.SearchByNameCommand}" CommandParameter="{Binding ProductVM.SearchName}" Margin="5" Grid.Row="1" Grid.Column="2"/>
 
                                     <!-- Row 2: Barcode -->
                                     <Label Foreground="White" FontSize="26" Grid.Row="2" Grid.Column="0">Barcode</Label>
-                                    <TextBox Width="150" Margin="5" Text="{Binding ProductVM.SearchBarcode}" Grid.Row="2" Grid.Column="1"/>
+                                    <TextBox Width="100" Height="30" Margin="5" Text="{Binding ProductVM.SearchBarcode}" Grid.Row="2" Grid.Column="1"/>
                                     <Button Content="🔎" Width="Auto" Height="auto" Command="{Binding ProductVM.SearchByBarcodeCommand}" CommandParameter="{Binding ProductVM.SearchBarcode}" Margin="5" Grid.Row="2" Grid.Column="2"/>
 
                                     <!-- Row 3: Producer -->
                                     <Label Foreground="White" FontSize="26" Grid.Row="3" Grid.Column="0">Producer</Label>
-                                    <TextBox Width="150" Margin="5" Text="{Binding ProductVM.SearchProducer}" Grid.Row="3" Grid.Column="1"/>
+                                    <TextBox Width="100" Height="30" Margin="5" Text="{Binding ProductVM.SearchProducer}" Grid.Row="3" Grid.Column="1"/>
                                     <Button Content="🔎" Width="Auto" Height="auto" Background="#FF499A49" Command="{Binding ProductVM.SearchByProducerCommand}" CommandParameter="{Binding ProductVM.SearchProducer}" Margin="5" Grid.Row="3" Grid.Column="2"/>
 
                                     <!-- Row 4: Category -->
                                     <Label Foreground="White" FontSize="26" Grid.Row="4" Grid.Column="0">Category</Label>
-                                    <ComboBox Width="150" Margin="5" ItemsSource="{Binding  ProductVM.Categories}" DisplayMemberPath="Name" SelectedItem="{Binding ProductVM.SearchCategory}" Grid.Row="4" Grid.Column="1"/>
+                                    <ComboBox Width="100"  Height="30" ItemsSource="{Binding  ProductVM.Categories}" DisplayMemberPath="Name" SelectedItem="{Binding ProductVM.SearchCategory}" Grid.Row="4" Grid.Column="1"/>
                                     <Button Content="🔎" Width="Auto" Height="auto" Background="#FF499A49" Command="{Binding ProductVM.SearchByCategoryCommand}" CommandParameter="{Binding ProductVM.SearchCategory}" Margin="5" Grid.Row="4" Grid.Column="2"/>
 
                                     <!-- Row 5: Expiration Date -->
                                     <Label Foreground="White" FontSize="26" Grid.Row="5" Grid.Column="0">Expiration Date</Label>
-                                    <DatePicker Width="150" Margin="5" Height="60" SelectedDate="{Binding ProductVM.SearchExpDate}" Grid.Row="5" Grid.Column="1"/>
+                                    <DatePicker Width="150" Margin="5" Height="40" SelectedDate="{Binding ProductVM.SearchExpDate}" Grid.Row="5" Grid.Column="1"/>
                                     <Button Content="🔎" Width="Auto" Height="auto" Command="{Binding ProductVM.SearchByExpDateCommand}" CommandParameter="{Binding ProductVM.SearchExpDate}" Margin="5" Grid.Row="5" Grid.Column="2"/>
                                 </Grid>
                                 <Label Foreground="White" FontSize="32" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0 40 0 0" Height="50">Search results:</Label>
@@ -124,10 +124,9 @@
                                         <DataGridTextColumn Header="Expiration Date" Binding="{Binding ExpirationDate}" Width="auto" />
                                     </DataGrid.Columns>
                                 </DataGrid>
-                                <Button Command="{Binding AddToReceiptCommand}" Content="Add Item" FontSize="30" Width="180" Height="70" Margin="0 30 0 0" Click="Button_Click" ></Button>
 
                             </StackPanel>
-                            <Grid VerticalAlignment="Center" Margin="280 0 0 0">
+                            <Grid VerticalAlignment="Top" Margin="200 100 0 0">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto" MinWidth="230" />
                                     <ColumnDefinition />
@@ -181,9 +180,7 @@
 
                     <!-- TabItem for Modifying -->
                     <TabItem Header="Modify" Margin="2,0,2,2" VerticalAlignment="Bottom">
-                        <StackPanel>
-                            <TextBlock Text="Modify Content" Padding="10"/>
-                        </StackPanel>
+                        <TextBlock Margin="20 90" Text="Stock can be modified only through sales!" Foreground="White" FontFamily="courier new" FontSize="28" VerticalAlignment="Center" HorizontalAlignment="Center" Padding="10"/>
                     </TabItem>
 
                     <!-- TabItem for Deleting -->
@@ -194,10 +191,97 @@
                     </TabItem>
                 </TabControl>
             </TabItem>
-            <TabItem Header="Discounts">
-
-            </TabItem>
+            
             <TabItem Header="Producers">
+                <TabControl TabStripPlacement="Left" SelectionChanged="ProducersTabControl_SelectionChanged">
+                    <TabItem Header="View">
+                        <StackPanel Orientation="Horizontal">
+                            <StackPanel Orientation="Vertical">
+                                <Label VerticalAlignment="Center" Margin="30 30" FontSize="28">Select a producer to see their products: </Label>
+                                <DataGrid VerticalAlignment="Center" Margin="30 0 " ItemsSource="{Binding ProducerVM.Producers}" SelectedItem="{Binding ProducerVM.SelectedProducer}" Name="ViewProducersDataGrid" SelectionChanged="DataGrid_SelectionChanged" Width="800" Height="500" SelectionMode="Single" FontSize="14"/>
+                            </StackPanel>
+                            <DataGrid ItemsSource="{Binding ProductsByProducer}" VerticalAlignment="Top" Margin="60 105" Width="800" Height="500"/>
+                        </StackPanel>
+                    </TabItem>
+                    <TabItem Header="Add">
+                        <StackPanel Orientation="Vertical" HorizontalAlignment="Left" Width="1650" Margin="80 0 0 0">
+                            <Label Foreground="white" Margin="30 230 0 0" Height="40" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="30">Add a new Producer:</Label>
+                            <Grid HorizontalAlignment="Center" VerticalAlignment="Top" Height="170" Margin="0 50 0 0" >
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="65px"/>
+                                    <RowDefinition Height="65px"/>
+
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="300"/>
+                                    <ColumnDefinition Width="220"/>
+                                </Grid.ColumnDefinitions>
+
+                                <!-- Row 0: ID -->
+                                <Label Foreground="White" FontSize="26" Grid.Row="0" Grid.Column="0">Name</Label>
+                                <TextBox Width="150" Margin="5" Text="{Binding ProducerVM.ProducerName}" Grid.Row="0" Grid.Column="1"/>
+
+
+                                <!-- Row 1: Name -->
+                                <Label Foreground="White" FontSize="26" Grid.Row="1" Grid.Column="0">Country of Origin</Label>
+                                <TextBox Width="150" Margin="5" Text="{Binding ProducerVM.ProducerOrigin}" Grid.Row="1" Grid.Column="1"/>
+
+                            </Grid>
+
+                            <Button Content="Submit" Width="150" Command="{Binding }" VerticalAlignment="Top" Margin="0 30 0 0"/>
+                        </StackPanel>
+                    </TabItem>
+
+                    <!-- TabItem for Modifying -->
+                    <TabItem Header="Modify" Margin="2,0,2,2" VerticalAlignment="Bottom">
+                        <StackPanel Orientation="Horizontal">
+                            <StackPanel Orientation="Vertical">
+                                <Label VerticalAlignment="Center" Margin="30 200 0 0" FontSize="28">Select a producer to modify their info:</Label>
+                                <DataGrid VerticalAlignment="Center" Margin="30 0 " ItemsSource="{Binding ProducerVM.Producers}" SelectedItem="{Binding ProducerVM.SelectedProducer}" Name="ModifyProducersDataGrid"  Width="700" Height="250" SelectionMode="Single" FontSize="14"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Vertical" HorizontalAlignment="Left" Width="600" Margin="40 0 0 0">
+                                <Label Foreground="white" Margin="30 200 0 0" Height="40" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="30">Update information:</Label>
+                                <Grid HorizontalAlignment="Center" VerticalAlignment="Top" Height="170" Margin="0 50 0 0" >
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="65px"/>
+                                        <RowDefinition Height="65px"/>
+
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="300"/>
+                                        <ColumnDefinition Width="220"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <!-- Row 0: ID -->
+                                    <Label Foreground="White" FontSize="26" Grid.Row="0" Grid.Column="0">Name</Label>
+                                    <TextBox Width="150" Margin="5" Text="{Binding ProducerVM.SelectedProducer.Name}" Grid.Row="0" Grid.Column="1"/>
+
+
+                                    <!-- Row 1: Name -->
+                                    <Label Foreground="White" FontSize="26" Grid.Row="1" Grid.Column="0">Country of Origin</Label>
+                                    <TextBox Width="150" Margin="5" Text="{Binding ProducerVM.SelectedProducer.Country}" Grid.Row="1" Grid.Column="1"/>
+
+                                </Grid>
+
+                                <Button Content="Submit" Width="150" Command="{Binding ModifyProducerCommand}" VerticalAlignment="Top" Margin="0 30 0 0"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </TabItem>
+
+                    <!-- TabItem for Deleting -->
+                    <TabItem Header="Delete">
+                        <StackPanel>
+                            <StackPanel Orientation="Vertical" Width="1200" Height="900">
+                                <Label VerticalAlignment="Center" Margin="130 90" FontSize="28">Select a producer to delete:</Label>
+                                <DataGrid VerticalAlignment="Center" Margin="30 0 " ItemsSource="{Binding ProducerVM.Producers}" SelectedItem="{Binding ProducerVM.SelectedProducer}" Name="DeleteProducersDataGrid" SelectionChanged="DataGrid_SelectionChanged" Width="700" Height="250" SelectionMode="Single" FontSize="14"/>
+                                <Button Command="{Binding DeleteProducerCommand}" Content="Delete" Width="150" Margin="0 30"/>
+                            </StackPanel>
+
+                        </StackPanel>
+                    </TabItem>
+                </TabControl>
+            </TabItem>
+            <TabItem Header="Discounts">
 
             </TabItem>
         </TabControl>

@@ -20,7 +20,7 @@ namespace Supermarket.Models.BusinessLogicLayer
 
         public void CreateStock(Stock stock)
         {
-            stock.ID = (_context.Stocks.Count() + 1).ToString();
+            //stock.ID = (_context.Stocks.Count() + 1).ToString();
             _context.Stocks.Add(stock);
             _context.SaveChanges();
         }

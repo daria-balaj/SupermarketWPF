@@ -23,11 +23,7 @@
         </TextBox>
         <Label Margin="0,10,0,10" Height="50" FontSize="22" Content="Password: "></Label>
         <PasswordBox PasswordChanged="PasswordBox_PasswordChanged" Name="passwordBox" Focusable="True" Height="35" Width ="150" Padding="4 8" HorizontalAlignment="Center" BorderThickness="2" BorderBrush="#FF499A49"/>
-        <!--<Label Margin="0,10,0,10" Height="50" FontSize="22">Role:</Label>
-        <ComboBox ItemsSource="{Binding Roles}" SelectedItem="{Binding SelectedRole}" Width="120" Margin="0,0,0,10"/>-->
         <TextBlock Text="{Binding ErrorMessage}" Foreground="Red" Margin="0,10,0,0" VerticalAlignment="Bottom" TextAlignment="Center"/>
-        <!--<Button Content="Register" Command="{Binding NewAccountCommand}" Width="100" HorizontalAlignment="Center" Margin="0 10"/>-->
-        <Button Content="Sign In" Command="{Binding SignInCommand}" Width="100" HorizontalAlignment="Center" Margin="0 0 0 10"/>
-        <ListBox ItemsSource="{Binding Users}"/>
+        <Button Content="Sign In" Command="{Binding SignInCommand}" HorizontalAlignment="Center" Width="80" Height="45" FontSize="24" Margin="0 0 0 10"/>
     </StackPanel>
 </Page>

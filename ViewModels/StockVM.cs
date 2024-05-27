@@ -16,7 +16,7 @@ namespace Supermarket.ViewModels
     {
         private string _stockID;
         private string _stockProductID;
-        private string _stockMeasurement;
+        private string _stockQuantity;
         private DateTime _stockRestockDate;
         private DateTime _stockExpirationDate;
         private float _stockBuyingPrice;
@@ -35,10 +35,10 @@ namespace Supermarket.ViewModels
             set { _stockProductID = value; OnPropertyChanged(); }
         }
 
-        public string StockMeasurement
+        public string StockQuantity
         {
-            get => _stockMeasurement;
-            set { _stockMeasurement = value; OnPropertyChanged(); }
+            get => _stockQuantity;
+            set { _stockQuantity = value; OnPropertyChanged(); }
         }
 
         public DateTime StockRestockDate
@@ -77,9 +77,7 @@ namespace Supermarket.ViewModels
             // Add the logic to add a new stock item to the database
             var newStock = new Stock
             {
-                ID = StockID,
-                ProductID = StockProductID,
-                Measurement = StockMeasurement,
+                Quantity = StockQuantity,
                 RestockDate = StockRestockDate,
                 ExpirationDate = StockExpirationDate,
                 BuyingPrice = StockBuyingPrice,

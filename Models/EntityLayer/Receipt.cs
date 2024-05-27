@@ -11,8 +11,8 @@ namespace Supermarket.Models.EntityLayer
     
     public class Receipt
     {
-        public string ID { get; set; }
-        public int ReceiptId { get; set; }
+        [Key]
+        public int ID { get; set; }
         public DateTime Emitted { get; set; }
         public User Cashier { get; set; }
         public List<ReceiptItem> Items { get; set; } = new List<ReceiptItem>();

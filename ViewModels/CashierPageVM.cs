@@ -20,7 +20,16 @@ namespace Supermarket.ViewModels
     public class CashierPageVM
     {
 
-        public User CurrentUser { get; set; }
+        public User currentUser;
+        public User CurrentUser
+        {
+            get { return currentUser; }
+            set
+            {
+                CurrentUser = value;
+                OnPropertyChanged(nameof(currentUser));
+            }
+        }
 
         public ProductVM ProductVM { get; set; } = new ProductVM();
 
@@ -29,18 +38,28 @@ namespace Supermarket.ViewModels
 
         public ObservableCollection<Models.EntityLayer.ReceiptItem> Items { get; set; }
 
-        public User Cashier { get; set; } 
-        
+        public User Cashier { get; set; }
 
-        public float Total { get; set; }
+
+        private float total;
+        public float Total
+        {
+            get { return total; }
+            set
+            {
+                total = value;
+                OnPropertyChanged(nameof(total));
+            }
+        }
 
        
         public void AddToReceipt()
         {
             if (ProductVM.SelectedProduct != null)
             {
-                Models.EntityLayer.ReceiptItem item = new Models.EntityLayer.ReceiptItem { ReceiptID = (((MainWindow)Application.Current.MainWindow)._context.Receipts.Count() + 1).ToString(), Product = ProductVM.SelectedProduct, ProductID = ProductVM.SelectedProduct.ID, Quantity = 1 };
+                Models.EntityLayer.ReceiptItem item = new Models.EntityLayer.ReceiptItem { Product = ProductVM.SelectedProduct, ProductID = ProductVM.SelectedProduct.ID, Quantity = 1 };
                 item.Subtotal = item.Quantity * ProductVM.SelectedProduct.Price;
+                Total += item.Subtotal;
                 Items.Add(item);
             }
         }
@@ -54,6 +73,7 @@ namespace Supermarket.ViewModels
         public ICommand SaveReceiptCommand => new RelayCommand(s => SaveReceipt());
         public CashierPageVM() 
         {
+            Total = 0;
             productService = new ProductService();
             receiptService = new ReceiptService();
             Items = new ObservableCollection<Models.EntityLayer.ReceiptItem>();

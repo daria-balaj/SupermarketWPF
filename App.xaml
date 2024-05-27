@@ -9,9 +9,9 @@
         <Style TargetType="TabItem">
             <Setter Property="Background" Value="#FF499A49"/>
             <Setter Property="Width" Value="Auto"/>
-            <Setter Property="Height" Value="80"/>
-            <Setter Property="Padding" Value="10" />
-            <Setter Property="FontSize" Value="26" />
+            <Setter Property="Height" Value="60"/>
+            <Setter Property="Padding" Value="5" />
+            <Setter Property="FontSize" Value="22" />
             <Setter Property="FontFamily" Value="Helvetica"/>
             <Setter Property="FontWeight" Value="DemiBold"/>
             <Setter Property="HorizontalContentAlignment" Value="Left" />
@@ -70,64 +70,6 @@
             <Setter Property="FontSize" Value="30"></Setter>
             <Setter Property="Padding" Value="8 5"/>
         </Style>
-
-        <!--<Style TargetType="TextBox">
-            <Setter Property="Height" Value="35"/>
-            <Setter Property="Width" Value="120"/>
-            <Setter Property="Padding" Value="5 8"/>
-            <Setter Property="FontWeight" Value="Medium"/>
-            <Setter Property="Focusable" Value="True"/>
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="TextBox">
-                        <Border CornerRadius="4" BorderBrush="#FF499A49" BorderThickness="1">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
-        <Style x:Key="textbox" TargetType="TextBox">
-            <Setter Property="Height" Value="25"/>
-            <Setter Property="Width" Value="120"/>
-            --><!--<Setter Property="Padding" Value="5 8"/>--><!--
-            <Setter Property="FontWeight" Value="Medium"/>
-            <Setter Property="Focusable" Value="True"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="TextBox">
-                        <Border CornerRadius="4" BorderBrush="#FF499A49" BorderThickness="1">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>-->
-        
-        
-        
-        
-        <!--<Style TargetType="PasswordBox">
-            <Setter Property="Height" Value="35"/>
-            <Setter Property="Width" Value="120"/>
-            --><!--<Setter Property="Padding" Value="5 8"/>--><!--
-            <Setter Property="FontWeight" Value="Medium"/>
-            <Setter Property="Focusable" Value="True"/>
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="PasswordBox">
-                        <Border CornerRadius="4" BorderBrush="#FF499A49" BorderThickness="1">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>-->
-
-
 
         <Style TargetType="Label">
             <Setter Property="Foreground" Value="White"></Setter>

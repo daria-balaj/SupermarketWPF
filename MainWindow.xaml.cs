@@ -4,6 +4,8 @@ using Supermarket.Data;
 using Supermarket.Models.EntityLayer;
 using Type = Supermarket.Models.EntityLayer.Type;
 using System.Windows;
+using Microsoft.VisualBasic.ApplicationServices;
+using User = Supermarket.Models.EntityLayer.User;
 
 
 namespace Supermarket
@@ -21,8 +23,8 @@ namespace Supermarket
             if (!context.Users.Any())
             {
                 context.Users.AddRange(
-                    new User() { ID="1", Username = "admin", Password = "7890", Role = Type.Administrator },
-                    new User() { ID="2", Username = "cashier", Password = "1234", Role = Type.Cashier }
+                    new User() { Username = "admin", Password = "7890", Role = Type.Administrator },
+                    new User() { Username = "cashier", Password = "1234", Role = Type.Cashier }
                 );
                 context.SaveChanges();
             }
@@ -30,13 +32,13 @@ namespace Supermarket
             if (!context.Categories.Any())
             {
                 context.Categories.AddRange(
-                    new Category() { ID = "1", Name = "Dairy" },
-                    new Category() { ID = "2", Name = "MeatAndFish" },
-                    new Category() { ID = "3", Name = "Clothing" },
-                    new Category() { ID = "4", Name = "House" },
-                    new Category() { ID = "5", Name = "FoodGeneral" },
-                    new Category() { ID = "6", Name = "Bakery" },
-                    new Category() { ID = "7", Name = "HealthAndBeauty" }
+                    new Category() { Name = "Dairy" },
+                    new Category() { Name = "MeatAndFish" },
+                    new Category() { Name = "Clothing" },
+                    new Category() { Name = "House" },
+                    new Category() { Name = "FoodGeneral" },
+                    new Category() { Name = "Bakery" },
+                    new Category() { Name = "HealthAndBeauty" }
                     //new Category { ID = "8", Name = "Dairy" },
                     //new Category { ID = "9", Name = "Dairy" },
                     //new Category { ID = "10", Name = "Dairy" }
@@ -58,8 +60,8 @@ namespace Supermarket
             if (!context.Products.Any())
             {
                 context.Products.AddRange(
-                    new Product() { ID = "100", Name = "Milk", Price = 9.50f, Barcode = "6012958", Category = context.Categories.Find("1"), Producer = context.Producers.Find("Napolact")!, ExpirationDate = DateOnly.FromDateTime(DateTime.Now.AddMonths(1)) },
-                    new Product() { ID= "101", Name = "Ice cream", Price = 14.90f, Barcode = "4576856", Category = context.Categories.Find("5"), Producer = context.Producers.Find("Transalpina")!, ExpirationDate = DateOnly.FromDateTime(DateTime.Now.AddDays(40)) }
+                    new Product() { Name = "Milk", Price = 9.50f, Barcode = "6012958", Category = context.Categories.Find(1), Producer = context.Producers.Find(1)!, ExpirationDate = DateOnly.FromDateTime(DateTime.Now.AddMonths(1)) },
+                    new Product() { Name = "Ice cream", Price = 14.90f, Barcode = "4576856", Category = context.Categories.Find(5), Producer = context.Producers.Find(3)!, ExpirationDate = DateOnly.FromDateTime(DateTime.Now.AddDays(40)) }
 
                 );
                 context.SaveChanges();
@@ -72,6 +74,15 @@ namespace Supermarket
         {
             InitializeComponent();
             _context = new DataContext();
+            var user = _context.Users.SingleOrDefault(u => u.Username == "admin");
+            if (user != null)
+            {
+                // Update the role to Admin
+                user.Role = Type.Administrator;
+
+                // Save the changes to the database
+                _context.SaveChanges();
+            }
             Seed(_context);
             NavigationService = new NavigationService(Frame, _context);
             Frame.Content = new StartPage();

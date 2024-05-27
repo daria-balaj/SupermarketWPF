@@ -12,8 +12,8 @@ using Supermarket.Data;
 namespace Supermarket.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240526170238_SecondMigration")]
-    partial class SecondMigration
+    [Migration("20240527211624_StartDb")]
+    partial class StartDb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,8 +27,11 @@ namespace Supermarket.Migrations
 
             modelBuilder.Entity("Supermarket.Models.EntityLayer.Category", b =>
                 {
-                    b.Property<string>("ID")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -41,8 +44,11 @@ namespace Supermarket.Migrations
 
             modelBuilder.Entity("Supermarket.Models.EntityLayer.Discount", b =>
                 {
-                    b.Property<string>("ID")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
                     b.Property<DateOnly>("End")
                         .HasColumnType("date");
@@ -50,9 +56,8 @@ namespace Supermarket.Migrations
                     b.Property<int>("Percentage")
                         .HasColumnType("int");
 
-                    b.Property<string>("ProductID")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("ProductID")
+                        .HasColumnType("int");
 
                     b.Property<int>("Reason")
                         .HasColumnType("int");
@@ -70,30 +75,39 @@ namespace Supermarket.Migrations
 
             modelBuilder.Entity("Supermarket.Models.EntityLayer.Producer", b =>
                 {
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
                     b.Property<string>("Country")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Name");
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ID");
 
                     b.ToTable("Producers");
                 });
 
             modelBuilder.Entity("Supermarket.Models.EntityLayer.Product", b =>
                 {
-                    b.Property<string>("ID")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
                     b.Property<string>("Barcode")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("CategoryID")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("CategoryID")
+                        .HasColumnType("int");
 
                     b.Property<DateOnly>("ExpirationDate")
                         .HasColumnType("date");
@@ -105,31 +119,34 @@ namespace Supermarket.Migrations
                     b.Property<float>("Price")
                         .HasColumnType("real");
 
-                    b.Property<string>("ProducerName")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("ProducerID")
+                        .HasColumnType("int");
 
                     b.HasKey("ID");
 
                     b.HasIndex("CategoryID");
 
-                    b.HasIndex("ProducerName");
+                    b.HasIndex("ProducerID");
 
                     b.ToTable("Products");
                 });
 
             modelBuilder.Entity("Supermarket.Models.EntityLayer.Receipt", b =>
                 {
-                    b.Property<string>("ID")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.Property<string>("CashierID")
-                        .HasColumnType("nvarchar(450)");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+
+                    b.Property<int>("CashierID")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("Emitted")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("ReceiptId")
-                        .HasColumnType("int");
+                    b.Property<float>("Total")
+                        .HasColumnType("real");
 
                     b.HasKey("ID");
 
@@ -140,11 +157,11 @@ namespace Supermarket.Migrations
 
             modelBuilder.Entity("Supermarket.Models.EntityLayer.ReceiptItem", b =>
                 {
-                    b.Property<string>("ReceiptID")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("ReceiptID")
+                        .HasColumnType("int");
 
-                    b.Property<string>("ProductID")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("ProductID")
+                        .HasColumnType("int");
 
                     b.Property<float>("Quantity")
                         .HasColumnType("real");
@@ -161,8 +178,11 @@ namespace Supermarket.Migrations
 
             modelBuilder.Entity("Supermarket.Models.EntityLayer.Stock", b =>
                 {
-                    b.Property<string>("ID")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
                     b.Property<float>("BuyingPrice")
                         .HasColumnType("real");
@@ -174,9 +194,8 @@ namespace Supermarket.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ProductID")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("ProductID")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("RestockDate")
                         .HasColumnType("datetime2");
@@ -191,12 +210,18 @@ namespace Supermarket.Migrations
 
             modelBuilder.Entity("Supermarket.Models.EntityLayer.User", b =>
                 {
-                    b.Property<string>("ID")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Role")
+                        .HasColumnType("int");
 
                     b.Property<string>("Username")
                         .IsRequired()
@@ -226,7 +251,9 @@ namespace Supermarket.Migrations
 
                     b.HasOne("Supermarket.Models.EntityLayer.Producer", "Producer")
                         .WithMany()
-                        .HasForeignKey("ProducerName");
+                        .HasForeignKey("ProducerID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Category");
 
@@ -237,7 +264,9 @@ namespace Supermarket.Migrations
                 {
                     b.HasOne("Supermarket.Models.EntityLayer.User", "Cashier")
                         .WithMany()
-                        .HasForeignKey("CashierID");
+                        .HasForeignKey("CashierID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Cashier");
                 });

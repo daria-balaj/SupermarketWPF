@@ -5,15 +5,18 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Supermarket.Migrations
 {
-    public partial class InitialSupermarketDb : Migration
+    /// <inheritdoc />
+    public partial class StartDb : Migration
     {
+        /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
                 name: "Categories",
                 columns: table => new
                 {
-                    ID = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
@@ -25,20 +28,23 @@ namespace Supermarket.Migrations
                 name: "Producers",
                 columns: table => new
                 {
-                    Name = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Country = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Producers", x => x.Name);
+                    table.PrimaryKey("PK_Producers", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Stocks",
                 columns: table => new
                 {
-                    ID = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ProductID = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ProductID = table.Column<int>(type: "int", nullable: false),
                     Measurement = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     RestockDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ExpirationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -54,9 +60,11 @@ namespace Supermarket.Migrations
                 name: "Users",
                 columns: table => new
                 {
-                    ID = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Username = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Role = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -67,12 +75,13 @@ namespace Supermarket.Migrations
                 name: "Products",
                 columns: table => new
                 {
-                    ID = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Price = table.Column<float>(type: "real", nullable: false),
                     Barcode = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CategoryID = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ProducerName = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    CategoryID = table.Column<int>(type: "int", nullable: false),
+                    ProducerID = table.Column<int>(type: "int", nullable: false),
                     ExpirationDate = table.Column<DateOnly>(type: "date", nullable: false)
                 },
                 constraints: table =>
@@ -85,20 +94,22 @@ namespace Supermarket.Migrations
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Products_Producers_ProducerName",
-                        column: x => x.ProducerName,
+                        name: "FK_Products_Producers_ProducerID",
+                        column: x => x.ProducerID,
                         principalTable: "Producers",
-                        principalColumn: "Name");
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Receipts",
                 columns: table => new
                 {
-                    ID = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ReceiptId = table.Column<int>(type: "int", nullable: false),
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Emitted = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CashierID = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                    CashierID = table.Column<int>(type: "int", nullable: false),
+                    Total = table.Column<float>(type: "real", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -107,15 +118,17 @@ namespace Supermarket.Migrations
                         name: "FK_Receipts_Users_CashierID",
                         column: x => x.CashierID,
                         principalTable: "Users",
-                        principalColumn: "ID");
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Discounts",
                 columns: table => new
                 {
-                    ID = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ProductID = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ProductID = table.Column<int>(type: "int", nullable: false),
                     Reason = table.Column<int>(type: "int", nullable: false),
                     Percentage = table.Column<int>(type: "int", nullable: false),
                     Start = table.Column<DateOnly>(type: "date", nullable: false),
@@ -136,15 +149,14 @@ namespace Supermarket.Migrations
                 name: "ReceiptItem",
                 columns: table => new
                 {
-                    ID = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ReceiptID = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ProductID = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ReceiptID = table.Column<int>(type: "int", nullable: false),
+                    ProductID = table.Column<int>(type: "int", nullable: false),
                     Quantity = table.Column<float>(type: "real", nullable: false),
                     Subtotal = table.Column<float>(type: "real", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ReceiptItem", x => x.ID);
+                    table.PrimaryKey("PK_ReceiptItem", x => new { x.ReceiptID, x.ProductID });
                     table.ForeignKey(
                         name: "FK_ReceiptItem_Products_ProductID",
                         column: x => x.ProductID,
@@ -171,19 +183,14 @@ namespace Supermarket.Migrations
                 column: "CategoryID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Products_ProducerName",
+                name: "IX_Products_ProducerID",
                 table: "Products",
-                column: "ProducerName");
+                column: "ProducerID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ReceiptItem_ProductID",
                 table: "ReceiptItem",
                 column: "ProductID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ReceiptItem_ReceiptID",
-                table: "ReceiptItem",
-                column: "ReceiptID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Receipts_CashierID",

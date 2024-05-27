@@ -23,7 +23,7 @@ namespace Supermarket.Models.BusinessLogicLayer
 
         public void CreateReceipt(ObservableCollection<ReceiptItem> items, float total)
         {
-            var r = new Receipt() { ID = (Context.Receipts.Count() + 1).ToString(), Cashier = Context.CurrentUser, Items = items.ToList(), Emitted = DateTime.Now, Total = total };
+            var r = new Receipt() { Cashier = Context.CurrentUser, Items = items.ToList(), Emitted = DateTime.Now, Total = total };
             Context.Receipts.Add(r);
             Context.SaveChanges();
         }

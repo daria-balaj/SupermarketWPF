@@ -10,10 +10,10 @@ namespace Supermarket.Models.EntityLayer
     {
         //[Key]
         //public string ID { get; set; }
-        public string ReceiptID { get; set; }
+        public int ReceiptID { get; set; }
         public Receipt Receipt { get; set; }
         public Product Product { get; set; }
-        public string ProductID { get; set; }
+        public int ProductID { get; set; }
         public float Quantity { get; set; }
         public float Subtotal { get; set; }
         public ReceiptItem() { }

@@ -1,6 +1,7 @@
 ﻿using Supermarket.Models.EntityLayer;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,9 +12,12 @@ namespace Supermarket.Models.EntityLayer
     //pret achizitie, pret de vanzare
     public class Stock
     {
-        public string ID { get; set; }
-        public string ProductID { get; set; }
-        public string Measurement { get; set; }
+        [Key]
+        public int ID { get; set; }
+        public int ProductID { get; set; }
+        //public string Measurement { get; set; }
+        public string Quantity { get; set; }
+
         public DateTime RestockDate { get; set; }
         public DateTime ExpirationDate { get; set; }
         public float BuyingPrice { get; set; }

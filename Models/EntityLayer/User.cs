@@ -9,18 +9,18 @@ namespace Supermarket.Models.EntityLayer
 {
     public enum Type
     {
-        Cashier,
-        Administrator
+        Cashier = 0,
+        Administrator = 1
     }
 
     public class User
     {
         [Key]
-        
-        public string ID { get; set; }
+        public int ID { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
-        public Type Role;
+        public Type Role { get; set; }
+        //public bool IsAdmin { get; set; }
         public User() { }
         public User(string username, string password, bool isAdmin)
         {

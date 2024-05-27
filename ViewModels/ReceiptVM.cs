@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace Supermarket.ViewModels
 {
-    public class ReceiptItem : Product
-    {
-        public int Quantity { get; set; }
-        public float Subtotal => Quantity * Price;
-    }
+    //public class ReceiptItem : Product
+    //{
+    //    public int Quantity { get; set; }
+    //    public float Subtotal => Quantity * Price;
+    //}
     public class ReceiptVM
     {
         public User CurrentUser { get; set; }

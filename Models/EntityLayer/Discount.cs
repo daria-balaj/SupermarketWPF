@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,15 +17,16 @@ namespace Supermarket.Models.EntityLayer
     }
     public class Discount
     {
-        public string ID { get; set; }
-        public string ProductID { get; set; }
+        [Key]
+        public int ID { get; set; }
+        public int ProductID { get; set; }
         public Reasons Reason { get; set; }
         public int Percentage { get; set; }
         public DateOnly Start { get; set; }
         public DateOnly End { get; set; }
 
         public Discount() { }
-        public Discount(string productID, Reasons reason, int percentage, DateOnly start, DateOnly end)
+        public Discount(int productID, Reasons reason, int percentage, DateOnly start, DateOnly end)
         {
             ProductID = productID;
             Reason = reason;

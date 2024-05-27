@@ -1,4 +1,5 @@
 ﻿using Supermarket.Data;
+using Supermarket.Models.EntityLayer;
 using Supermarket.Services;
 using Supermarket.ViewModels;
 using System;
@@ -43,9 +44,16 @@ namespace Supermarket.Views
 
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void ProducersTabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (AdminVM.ProducerVM != null)
+                AdminVM.ProducerVM.SelectedProducer = null;
+        }
 
+        private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            AdminVM.ProducerVM.SelectedProducer = (Producer)ViewProducersDataGrid.SelectedItem;
+            AdminVM.ViewProductsFromProducer();
         }
     }
 }

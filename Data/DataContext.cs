@@ -25,11 +25,10 @@ namespace Supermarket.Data
 
         public User CurrentUser { get; set; }
 
-        //private readonly string connectionString = ConfigurationManager.ConnectionStrings["myConStr"].ConnectionString;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=localhost;Database=SupermarketDb;Trusted_Connection=True;Encrypt=false");
+            optionsBuilder.UseSqlServer("Server=localhost;Database=Supermarket;Trusted_Connection=True;Encrypt=false");
         }
 
         protected override void OnModelCreating(ModelBuilder builder)

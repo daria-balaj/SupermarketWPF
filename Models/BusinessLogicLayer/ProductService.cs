@@ -17,7 +17,7 @@ namespace Supermarket.Models.BusinessLogicLayer
             _context = ((MainWindow)Application.Current.MainWindow)._context;
         }
 
-        public Product? GetProductByID(string id)
+        public Product? GetProductByID(int id)
         {
             return _context.Products.FirstOrDefault(p => p.ID == id);
         }

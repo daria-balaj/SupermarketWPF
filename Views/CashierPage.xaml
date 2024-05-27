@@ -146,11 +146,12 @@
                     </DataGrid>
                 <Label HorizontalAlignment="Center" FontSize="26">..................................</Label>
 
-                    <Label Content="{Binding Total}"></Label>
-                <TextBlock FontSize="30" FontWeight="Bold" Margin="35 10" HorizontalAlignment="Right">
+                <Label FontSize="25" Content="Total: "/>
+                <Label FontSize="25"  Content="{Binding Total}"></Label>
+                <!--<TextBlock FontSize="30" FontWeight="Bold" Margin="35 10" HorizontalAlignment="Right">
                     <Run Text="Total: "/>
                     <Run Text="{Binding Total}"/>
-                </TextBlock>
+                </TextBlock>-->
                 <TextBlock FontSize="28" HorizontalAlignment="Center" FontWeight="DemiBold" Width="420" TextWrapping="Wrap" Height="100">Thank you for shopping at our local business!</TextBlock>
                 </StackPanel>
             <Button Content="Save Receipt" Margin="40, 0" FontSize="30" VerticalAlignment="Bottom" Height="70" Command="{Binding SaveReceiptCommand}" Width="230px"/>

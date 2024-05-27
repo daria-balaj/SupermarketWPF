@@ -25,7 +25,7 @@ namespace Supermarket.ViewModels
         }
 
         public ProductService productService { get; set; }
-        public string SearchID { get; set; }
+        public int SearchID { get; set; }
         public string SearchName { get; set; }
         public string SearchBarcode { get; set; }
         public Category SearchCategory { get; set; }
@@ -51,7 +51,7 @@ namespace Supermarket.ViewModels
         public ICommand SearchByIDCommand => new RelayCommand(parameter =>
         {
             SearchResults.Clear();
-            var p = productService.GetProductByID((string)parameter);
+            var p = productService.GetProductByID((int)parameter);
             if (p != null)
                 SearchResults.Add(p);
         });
