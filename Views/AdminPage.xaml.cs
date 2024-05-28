@@ -50,10 +50,16 @@ namespace Supermarket.Views
                 AdminVM.ProducerVM.SelectedProducer = null;
         }
 
-        private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+
+        private void DatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
-            AdminVM.ProducerVM.SelectedProducer = (Producer)ViewProducersDataGrid.SelectedItem;
-            AdminVM.ViewProductsFromProducer();
+
+        }
+
+        private void ProductsTabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (AdminVM.ProductVM != null)
+                AdminVM.ProductVM.SelectedProduct = null;
         }
     }
 }

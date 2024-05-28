@@ -65,7 +65,7 @@ namespace Supermarket.ViewModels
             set { _stockSellingPrice = value; OnPropertyChanged(); }
         }
 
-        public ICommand AddStockCommand => new RelayCommand(x => AddStock());
+        //public ICommand AddStockCommand => new RelayCommand(x => AddStock());
 
         public StockVM()
         {

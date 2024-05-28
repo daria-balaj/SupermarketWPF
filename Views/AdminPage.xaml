@@ -25,46 +25,140 @@
     <Grid HorizontalAlignment="Stretch">
         <TabControl Width="1870">
             <TabItem Header="Users">
-                <!--<StackPanel Orientation="Horizontal" >
-                    <DataGrid Width="700" ItemsSource="{Binding Products}" AutoGenerateColumns="False" CanUserAddRows="True" CanUserDeleteRows="True">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="ID" Binding="{Binding ID}"/>
-                            <DataGridTextColumn Header="Username" Binding="{Binding Username}"/>
-                            <DataGridTextColumn Header="Password" Binding="{Binding Password}"/>
-                        </DataGrid.Columns>
-                    </DataGrid>
-
-                </StackPanel>-->
+                
             </TabItem>
             <TabItem Header="Products">
-                <!--<DataGrid Width="500" ItemsSource="{Binding Products}" AutoGenerateColumns="False" CanUserAddRows="True" CanUserDeleteRows="True">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="ID" Binding="{Binding ID}"/>
-                        <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
-                        <DataGridTextColumn Header="Barcode" Binding="{Binding Barcode}"/>
-                        <DataGridTextColumn Header="Price" Binding="{Binding Price}"/>
-                        <DataGridTextColumn Header="Producer" Binding="{Binding Producer}"/>
-                        <DataGridTextColumn Header="Sell By" Binding="{Binding SellBy}"/>
-                        <DataGridTextColumn Header="Discount" Binding="{Binding Discount}"/>
-                        -->
-                <!--<DataGridTextColumn Header="Category" Binding="{Binding Price}"/>-->
-                <!--
-                    </DataGrid.Columns>
-                </DataGrid>-->
-
-            </TabItem>
-            <TabItem Header="Stock">
-                <TabControl TabStripPlacement="Left">
+                <TabControl TabStripPlacement="Left" SelectionChanged="ProductsTabControl_SelectionChanged" >
                     <TabItem Header="View">
-                        <StackPanel Orientation="Horizontal">
-                            <DataGrid Name="ViewStockslistBox" ItemsSource="{Binding StockList}" Width="1200" MaxHeight="900" SelectionMode="Single" FontSize="14" SelectionChanged="listBox_SelectionChanged"/>
+                        <StackPanel Orientation="Horizontal" Width="1700">
+                            <DataGrid Name="ViewStockslistBox" Background="white" Foreground="black" Margin="500 -190 0 0" ItemsSource="{Binding ProductList}" Width="600" MaxHeight="300" SelectionMode="Single" FontSize="18" SelectionChanged="listBox_SelectionChanged"/>
 
                         </StackPanel>
                     </TabItem>
                     <TabItem Header="Add">
                         <StackPanel Orientation="Horizontal" Width="1500">
                             <StackPanel Orientation="Vertical" HorizontalAlignment="Left" Width="650" Margin="80 0 0 0">
-                                <Label Foreground="white" Margin="30 90 0 0" Height="40" VerticalAlignment="Top" FontSize="22">Search for products by:</Label>
+                                <Label Foreground="white" Margin="30 30 0 0" Height="40" VerticalAlignment="Top" FontSize="22">Add new product:</Label>
+                                <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Height="550" Margin="0 10 0 0" >
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="55px"/>
+                                        <RowDefinition Height="55px"/>
+                                        <RowDefinition Height="55px"/>
+                                        <RowDefinition Height="55px"/>
+                                        <RowDefinition Height="55px"/>
+                                        <RowDefinition Height="55px"/>
+                                        <RowDefinition Height="85px"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="250"/>
+                                        <ColumnDefinition Width="180"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <!-- Row 0: ID -->
+                                    <Label Foreground="White" FontSize="24" Grid.Row="0" Grid.Column="0">Name</Label>
+                                    <TextBox Width="100" Height="30" Margin="5" Text="{Binding ProductVM.Name}" Grid.Row="0" Grid.Column="1"/>
+
+
+                                    <!-- Row 1: Name -->
+                                    <Label Foreground="White" FontSize="26" Grid.Row="1" Grid.Column="0">Barcode</Label>
+                                    <TextBox Width="100" Height="30" Margin="5" Text="{Binding ProductVM.Barcode}" Grid.Row="1" Grid.Column="1"/>
+
+                                    <!-- Row 2: Barcode -->
+                                    <Label Foreground="White" FontSize="26" Grid.Row="2" Grid.Column="0">Price</Label>
+                                    <TextBox Width="100" Height="30" Margin="5" Text="{Binding ProductVM.Price}" Grid.Row="2" Grid.Column="1"/>
+
+                                    <!-- Row 3: Producer -->
+                                    <Label Foreground="White" FontSize="26" Grid.Row="3" Grid.Column="0">Producer</Label>
+                                    <TextBox Width="100" Height="30" Margin="5" Text="{Binding ProductVM.Producer.Name}" Grid.Row="3" Grid.Column="1"/>
+
+                                    <!-- Row 4: Category -->
+                                    <Label Foreground="White" FontSize="26" Grid.Row="4" Grid.Column="0">Category</Label>
+                                    <ComboBox Width="100"  Height="30" ItemsSource="{Binding ProductVM.CategoryList}" DisplayMemberPath="Name" SelectedItem="{Binding ProductVM.Category}" Grid.Row="4" Grid.Column="1"/>
+
+                                    <!-- Row 5: Expiration Date -->
+                                    <Label Foreground="White" FontSize="26" Grid.Row="5" Grid.Column="0">Expiration Date</Label>
+                                    <DatePicker Width="150" Margin="5" Height="40"  SelectedDate="{Binding ProductVM.ExpirationDate}" Grid.Row="5" Grid.Column="1"/>
+                                    
+                                    <Button Grid.Row="8" Grid.Column="1" Width="130" Height="50" FontSize="24" Content="Submit" Command="{Binding AddProductCommand}" Margin="0,10,0,10" HorizontalAlignment="Center" />
+
+                                </Grid>
+                            </StackPanel>
+                        </StackPanel>
+                    </TabItem>
+
+                    <!-- TabItem for Modifying -->
+                    <TabItem Header="Modify" Margin="2,0,2,2" VerticalAlignment="Bottom">
+                        <StackPanel  Orientation="Horizontal" Margin="0 20 " Height="550" Width="1500" VerticalAlignment="Top" HorizontalAlignment="Center">
+                            <DataGrid Margin="90 70 0 0" VerticalAlignment="Top" Background="white" Foreground="black" Width="600" ItemsSource="{Binding ProductList}" SelectedItem="{Binding ProductVM.SelectedProduct}"  Height="300" SelectionMode="Single" FontSize="18" />
+                            <Grid HorizontalAlignment="Right" VerticalAlignment="Top" Height="650" Margin="120 60 0 0" >
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="55px"/>
+                                    <RowDefinition Height="55px"/>
+                                    <RowDefinition Height="55px"/>
+                                    <RowDefinition Height="55px"/>
+                                    <RowDefinition Height="55px"/>
+                                    <RowDefinition Height="55px"/>
+                                    <RowDefinition Height="55px"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="250"/>
+                                    <ColumnDefinition Width="180"/>
+                                </Grid.ColumnDefinitions>
+
+                                <!-- Row 0: ID -->
+                                <Label Foreground="White" FontSize="24" Grid.Row="0" Grid.Column="0">Name</Label>
+                                <TextBox Width="100" Height="30" Margin="5" Text="{Binding ProductVM.SelectedProduct.Name}" Grid.Row="0" Grid.Column="1"/>
+
+
+                                <!-- Row 1: Name -->
+                                <Label Foreground="White" FontSize="26" Grid.Row="1" Grid.Column="0">Barcode</Label>
+                                <TextBox Width="100" Height="30" Margin="5" Text="{Binding ProductVM.SelectedProduct.Barcode}" Grid.Row="1" Grid.Column="1"/>
+
+                                <!-- Row 2: Barcode -->
+                                <Label Foreground="White" FontSize="26" Grid.Row="2" Grid.Column="0">Price</Label>
+                                <TextBox Width="100" Height="30" Margin="5" Text="{Binding ProductVM.SelectedProduct.Price}" Grid.Row="2" Grid.Column="1"/>
+
+                                <!-- Row 3: Producer -->
+                                <Label Foreground="White" FontSize="26" Grid.Row="3" Grid.Column="0">Producer</Label>
+                                <TextBox Width="100" Height="30" Margin="5" Text="{Binding ProductVM.SelectedProduct.Producer.Name}" Grid.Row="3" Grid.Column="1"/>
+
+                                <!-- Row 4: Category -->
+                                <Label Foreground="White" FontSize="26" Grid.Row="4" Grid.Column="0">Category</Label>
+                                <ComboBox Width="100"  Height="30" ItemsSource="{Binding ProductVM.CategoryList}" DisplayMemberPath="Name" SelectedItem="{Binding ProductVM.SelectedProduct.Category}" Grid.Row="4" Grid.Column="1"/>
+
+                                <!-- Row 5: Expiration Date -->
+                                <Label Foreground="White" FontSize="26" Grid.Row="5" Grid.Column="0">Expiration Date</Label>
+                                <DatePicker Width="150" Margin="5" Height="40"  SelectedDate="{Binding ProductVM.ExpirationDate}" Grid.Row="5" Grid.Column="1"/>
+
+                                <Button Grid.Row="6" Grid.Column="0" Width="130" Height="50" FontSize="24" Content="Submit" Command="{Binding ModifyProductCommand}" Margin="0,0,0,10" HorizontalAlignment="Center" />
+
+                            </Grid>
+
+                        </StackPanel>
+                    </TabItem>
+
+                    <!-- TabItem for Deleting -->
+                    <TabItem Header="Delete">
+                        <StackPanel Orientation="Vertical">
+                            <DataGrid Background="white" Foreground="black" Width="600" ItemsSource="{Binding ProductList}" SelectedItem="{Binding ProductVM.SelectedProduct}"  Height="300" SelectionMode="Single" FontSize="18" />
+                            <Button Grid.Row="8" Grid.Column="1" Width="130" Height="50" FontSize="24" Content="Delete" Command="{Binding DeleteProductCommand}" Margin="0,10,0,10" HorizontalAlignment="Center" />
+                        </StackPanel>
+                    </TabItem>
+                </TabControl>
+
+            </TabItem>
+            <TabItem Header="Stock">
+                <TabControl TabStripPlacement="Left">
+                    <TabItem Header="View">
+                        <StackPanel Orientation="Horizontal" Width="1700">
+                            <DataGrid Background="white" Foreground="black" Margin="500 -190 0 0" ItemsSource="{Binding StockList}" Width="600" MaxHeight="300" SelectionMode="Single" FontSize="18" SelectionChanged="listBox_SelectionChanged"/>
+
+                        </StackPanel>
+                    </TabItem>
+                    <TabItem Header="Add">
+                        <StackPanel Orientation="Horizontal" Width="1500">
+                            <StackPanel Orientation="Vertical" HorizontalAlignment="Left" Width="650" Margin="80 0 0 0">
+                                <Label Foreground="white" Margin="30 30 0 0" Height="40" VerticalAlignment="Top" FontSize="22">Search for products by:</Label>
                                 <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Height="350" Margin="0 10 0 0" >
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="55px"/>
@@ -104,7 +198,7 @@
 
                                     <!-- Row 4: Category -->
                                     <Label Foreground="White" FontSize="26" Grid.Row="4" Grid.Column="0">Category</Label>
-                                    <ComboBox Width="100"  Height="30" ItemsSource="{Binding  ProductVM.Categories}" DisplayMemberPath="Name" SelectedItem="{Binding ProductVM.SearchCategory}" Grid.Row="4" Grid.Column="1"/>
+                                    <ComboBox Width="100"  Height="30" ItemsSource="{Binding  ProductVM.CategoryList}" DisplayMemberPath="Name" SelectedItem="{Binding ProductVM.SearchCategory}" Grid.Row="4" Grid.Column="1"/>
                                     <Button Content="🔎" Width="Auto" Height="auto" Background="#FF499A49" Command="{Binding ProductVM.SearchByCategoryCommand}" CommandParameter="{Binding ProductVM.SearchCategory}" Margin="5" Grid.Row="4" Grid.Column="2"/>
 
                                     <!-- Row 5: Expiration Date -->
@@ -135,7 +229,7 @@
                                     
                                     <RowDefinition Height="70" />
                                     <RowDefinition Height="70" />
-                                    <RowDefinition Height="70" />
+                                    <RowDefinition Height="0" />
                                     <RowDefinition Height="70" />
                                     <RowDefinition Height="70" />
                                     <RowDefinition Height="70" />
@@ -150,27 +244,27 @@
 
                                 <!-- ProductQuantity -->
                                 <Label Grid.Row="1" Content="Quantity:" />
-                                <TextBox Grid.Row="1" Grid.Column="1" Width="70" Margin="10,10,10,10" Text="{Binding StockQuantity}" />
+                                <TextBox Grid.Row="1" Grid.Column="1" Width="70" Margin="10,10,10,10" Text="{Binding StockVM.StockQuantity}" />
 
-                                <!-- Measurement -->
-                                <Label Grid.Row="2" Content="Measurement:" />
-                                <TextBox Grid.Row="2" Grid.Column="1" Width="180" Margin="10,10,10,10" Text="{Binding StockMeasurement}" />
+                                <!-- Measurement --><!--
+                                <Label Grid.Row="2" Content="Quantity:" />
+                                <TextBox Grid.Row="2" Grid.Column="1" Width="180" Margin="10,10,10,10" Text="{Binding StockMeasurement}" />-->
 
                                 <!-- RestockDate -->
                                 <Label Grid.Row="3" Content="Restock Date:"/>
-                                <DatePicker Grid.Row="3" Grid.Column="1" Margin="10,10,10,10" SelectedDate="{Binding StockRestockDate}" />
+                                <DatePicker Grid.Row="3" Grid.Column="1" Margin="10,10,10,10" SelectedDate="{Binding StockVM.StockRestockDate}" />
 
                                 <!-- ExpirationDate -->
                                 <Label Grid.Row="4" Content="Expiration Date:" />
-                                <DatePicker Grid.Row="4" Grid.Column="1" Margin="10,10,10,10" SelectedDate="{Binding StockExpirationDate}" />
+                                <DatePicker Grid.Row="4" Grid.Column="1" Margin="10,10,10,10" SelectedDate="{Binding StockVM.StockExpirationDate}" />
 
                                 <!-- BuyingPrice -->
                                 <Label Grid.Row="5" Content="Buying Price:"/>
-                                <TextBox Grid.Row="5" Grid.Column="1" Width="180" Margin="10,10,10,10" Text="{Binding StockBuyingPrice}" />
+                                <TextBox Grid.Row="5" Grid.Column="1" Width="180" Margin="10,10,10,10" Text="{Binding StockVM.StockBuyingPrice}" />
 
                                 <!-- SellingPrice -->
                                 <Label Grid.Row="6" Content="Selling Price:"/>
-                                <TextBlock HorizontalAlignment="Right"  Grid.Row="6" Grid.Column="1" Width="NaN" Foreground="White" FontSize="28" Margin="10,10,50,10" ><Run Text="{Binding StockSellingPrice}" /><Run Text=" "/><Run Text=" lei"/></TextBlock>
+                                <TextBlock HorizontalAlignment="Right"  Grid.Row="6" Grid.Column="1" Width="NaN" Foreground="White" FontSize="28" Margin="10,10,50,10" ><Run Text="{Binding StockVM.StockSellingPrice}" /><Run Text=" lei"/></TextBlock>
 
                                 <!-- Add Stock Button -->
                                 <Button Grid.Row="7" Grid.Column="1" Width="170" Content="Add Stock" Command="{Binding AddStockCommand}" Margin="0,10,0,10" HorizontalAlignment="Center" />
@@ -198,9 +292,9 @@
                         <StackPanel Orientation="Horizontal">
                             <StackPanel Orientation="Vertical">
                                 <Label VerticalAlignment="Center" Margin="30 30" FontSize="28">Select a producer to see their products: </Label>
-                                <DataGrid VerticalAlignment="Center" Margin="30 0 " ItemsSource="{Binding ProducerVM.Producers}" SelectedItem="{Binding ProducerVM.SelectedProducer}" Name="ViewProducersDataGrid" SelectionChanged="DataGrid_SelectionChanged" Width="800" Height="500" SelectionMode="Single" FontSize="14"/>
+                                <DataGrid VerticalAlignment="Center" Margin="30 0 " ItemsSource="{Binding ProducerVM.Producers}" SelectedItem="{Binding ProducerVM.SelectedProducer}" Name="ViewProducersDataGrid" Width="600" Height="300" SelectionMode="Single" FontSize="14"/>
                             </StackPanel>
-                            <DataGrid ItemsSource="{Binding ProductsByProducer}" VerticalAlignment="Top" Margin="60 105" Width="800" Height="500"/>
+                            <DataGrid ItemsSource="{Binding ProductsByProducer}" VerticalAlignment="Top" Margin="60 105" Width="600" Height="300"/>
                         </StackPanel>
                     </TabItem>
                     <TabItem Header="Add">
@@ -228,7 +322,7 @@
 
                             </Grid>
 
-                            <Button Content="Submit" Width="150" Command="{Binding }" VerticalAlignment="Top" Margin="0 30 0 0"/>
+                            <Button Content="Submit" Width="150" Command="{Binding AddProducerCommand}" VerticalAlignment="Top" Margin="0 30 0 0"/>
                         </StackPanel>
                     </TabItem>
 
@@ -273,7 +367,7 @@
                         <StackPanel>
                             <StackPanel Orientation="Vertical" Width="1200" Height="900">
                                 <Label VerticalAlignment="Center" Margin="130 90" FontSize="28">Select a producer to delete:</Label>
-                                <DataGrid VerticalAlignment="Center" Margin="30 0 " ItemsSource="{Binding ProducerVM.Producers}" SelectedItem="{Binding ProducerVM.SelectedProducer}" Name="DeleteProducersDataGrid" SelectionChanged="DataGrid_SelectionChanged" Width="700" Height="250" SelectionMode="Single" FontSize="14"/>
+                                <DataGrid VerticalAlignment="Center" Margin="30 0 " ItemsSource="{Binding ProducerVM.Producers}" SelectedItem="{Binding ProducerVM.SelectedProducer}" Name="DeleteProducersDataGrid" Width="700" Height="250" SelectionMode="Single" FontSize="14"/>
                                 <Button Command="{Binding DeleteProducerCommand}" Content="Delete" Width="150" Margin="0 30"/>
                             </StackPanel>
 
@@ -281,8 +375,49 @@
                     </TabItem>
                 </TabControl>
             </TabItem>
-            <TabItem Header="Discounts">
+            <TabItem Header="Categories">
+                <TabControl TabStripPlacement="Left">
+                    <TabItem Header="View">
+                        <StackPanel Orientation="Horizontal" Width="1700">
+                            <DataGrid Background="white" Foreground="black" Margin="500 -190 0 0" ItemsSource="{Binding StockList}" Width="600" MaxHeight="300" SelectionMode="Single" FontSize="18" SelectionChanged="listBox_SelectionChanged"/>
 
+                        </StackPanel>
+                    </TabItem>
+                    <TabItem Header="Add">
+                        <StackPanel Orientation="Horizontal" Width="1500">
+                            <Grid VerticalAlignment="Top" Margin="200 100 0 0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" MinWidth="230" />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+
+                                    <RowDefinition Height="70" />
+                                    <RowDefinition Height="80" />
+                                </Grid.RowDefinitions>
+
+
+                                <!-- Name -->
+                                <Label Grid.Row="0" Content="Category Name:" VerticalAlignment="Center" />
+                                <TextBox Grid.Row="0" Grid.Column="1"  Width="180" Margin="10,10,10,10" Text="{Binding CategoryVM.NewCategoryName }" />
+
+                                <!-- Add Stock Button -->
+                                <Button Grid.Row="7" Grid.Column="1" Width="210" Height="60" Content="Add Category" Command="{Binding AddCategoryCommand}" Margin="0,10,0,10" HorizontalAlignment="Center" />
+                            </Grid>
+                        </StackPanel>
+                    </TabItem>
+
+                    <!-- TabItem for Modifying -->
+                    <TabItem Header="Modify" Margin="2,0,2,2" VerticalAlignment="Bottom">
+                    </TabItem>
+
+                    <!-- TabItem for Deleting -->
+                    <TabItem Header="Delete">
+                        <StackPanel>
+                            <TextBlock Text="Delete Content" Padding="10"/>
+                        </StackPanel>
+                    </TabItem>
+                </TabControl>
             </TabItem>
         </TabControl>
 

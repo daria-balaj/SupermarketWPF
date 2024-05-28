@@ -1,4 +1,5 @@
-﻿using Supermarket.Data;
+﻿using Microsoft.EntityFrameworkCore.Migrations.Operations;
+using Supermarket.Data;
 using Supermarket.Models.EntityLayer;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,22 @@ namespace Supermarket.Models.BusinessLogicLayer
             _context = ((MainWindow)Application.Current.MainWindow)._context;
         }
 
+        public void CreateProduct(Product p)
+        {
+            if (p != null)
+                _context.Products.Add(p);
+            _context.SaveChanges();
+        }
+
+        public void UpdateProduct(Product p)
+        {
+            if (p != null)
+            {
+                _context.Products.Update(p);
+                _context.SaveChanges();
+            }
+
+        }
         public Product? GetProductByID(int id)
         {
             return _context.Products.FirstOrDefault(p => p.ID == id);
@@ -41,9 +58,9 @@ namespace Supermarket.Models.BusinessLogicLayer
             return _context.Products.Where(p => p.Producer.Name == producerName).ToList();
         }
 
-        public IEnumerable<Product> GetProductsByExpDate(DateOnly expirationDate)
+        public IEnumerable<Product> GetProductsByExpDate(DateTime expirationDate)
         {
-            return _context.Products.Where(p => p.ExpirationDate == expirationDate).ToList();
+            return _context.Products.Where(p => p.ExpirationDate.ToString() == expirationDate.Date.ToShortDateString()).ToList();
         }
     }
 }

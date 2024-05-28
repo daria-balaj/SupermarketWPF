@@ -56,9 +56,18 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border Background="{TemplateBinding Background}" CornerRadius="4">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="4" x:Name="border">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#FF207520"/>
+                                <Setter TargetName="border" Property="BorderBrush" Value="#FF105010"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#FF60B060"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
@@ -69,6 +78,7 @@
             <Setter Property="FontWeight" Value="Medium"/>
             <Setter Property="FontSize" Value="30"></Setter>
             <Setter Property="Padding" Value="8 5"/>
+           
         </Style>
 
         <Style TargetType="Label">

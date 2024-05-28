@@ -17,7 +17,7 @@ namespace Supermarket.Models.EntityLayer
         public string Barcode { get; set; }
         public Category Category { get; set; }
         public Producer Producer { get; set; }
-        public DateOnly ExpirationDate { get; set; }
+        public DateTime ExpirationDate { get; set; }
         public Discount? Discount { get; set; }
         public Product() { }
     }

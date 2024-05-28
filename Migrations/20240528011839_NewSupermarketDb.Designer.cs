@@ -12,8 +12,8 @@ using Supermarket.Data;
 namespace Supermarket.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240527215022_ChangedMeasurementToQty")]
-    partial class ChangedMeasurementToQty
+    [Migration("20240528011839_NewSupermarketDb")]
+    partial class NewSupermarketDb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

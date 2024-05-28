@@ -19,7 +19,7 @@ namespace Supermarket.ViewModels
         {
             productService = new ProductService();
             SearchResults = new ObservableCollection<Product>();
-            Categories = ((MainWindow)Application.Current.MainWindow)._context.Categories.ToList();
+            CategoryList = ((MainWindow)Application.Current.MainWindow)._context.Categories.ToList();
             Producers = ((MainWindow)Application.Current.MainWindow)._context.Producers.ToList();
 
         }
@@ -30,8 +30,14 @@ namespace Supermarket.ViewModels
         public string SearchBarcode { get; set; }
         public Category SearchCategory { get; set; }
         public string SearchProducer { get; set; }
-        public DateOnly? SearchExpDate { get; set; }
+        public DateTime? SearchExpDate { get; set; }
 
+        public string Name { get; set; }
+        public float Price { get; set; }
+        public string Barcode { get; set; }
+        public Category Category { get; set; }
+        public Producer Producer { get; set; } = new Producer();
+        public DateTime ExpirationDate { get; set; }
         public Product SelectedProduct { get; set; }
 
         private ObservableCollection<Product> _searchResults;
@@ -45,7 +51,7 @@ namespace Supermarket.ViewModels
             }
         }
 
-        public List<Category> Categories { get; set; }
+        public List<Category> CategoryList { get; set; }
         public List<Producer> Producers { get; set; }
 
         public ICommand SearchByIDCommand => new RelayCommand(parameter =>
@@ -59,7 +65,7 @@ namespace Supermarket.ViewModels
         public ICommand SearchByBarcodeCommand => new RelayCommand(parameter => { SearchResults.Clear(); var p = productService.GetProductByBarcode((string)parameter); if (p != null) SearchResults.Add(p); });
         public ICommand SearchByProducerCommand => new RelayCommand(parameter => { SearchResults.Clear(); var p = productService.GetProductsByProducer((string)parameter); if (p != null) foreach (var result in p) SearchResults.Add(result); });
         public ICommand SearchByCategoryCommand => new RelayCommand(parameter => { SearchResults.Clear(); var p = productService.GetProductsByCategory((Category)parameter); if (p != null) foreach (var result in p) SearchResults.Add(result); });
-        public ICommand SearchByExpDateCommand => new RelayCommand(parameter => { SearchResults.Clear(); var p = productService.GetProductsByExpDate((DateOnly)parameter); if (p != null) foreach (var result in p) SearchResults.Add(result); });
+        public ICommand SearchByExpDateCommand => new RelayCommand(parameter => { if (parameter != null) { SearchResults.Clear(); var p = productService.GetProductsByExpDate((DateTime)parameter); if (p != null) foreach (var result in p) SearchResults.Add(result); } });
 
 
 

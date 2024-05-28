@@ -59,11 +59,11 @@ namespace Supermarket
             // Seed Products
             if (!context.Products.Any())
             {
-                context.Products.AddRange(
-                    new Product() { Name = "Milk", Price = 9.50f, Barcode = "6012958", Category = context.Categories.Find(1), Producer = context.Producers.Find(1)!, ExpirationDate = DateOnly.FromDateTime(DateTime.Now.AddMonths(1)) },
-                    new Product() { Name = "Ice cream", Price = 14.90f, Barcode = "4576856", Category = context.Categories.Find(5), Producer = context.Producers.Find(3)!, ExpirationDate = DateOnly.FromDateTime(DateTime.Now.AddDays(40)) }
+                //context.Products.AddRange(
+                //    new Product() { Name = "Milk", Price = 9.50f, Barcode = "6012958", Category = context.Categories.Find(1), Producer = context.Producers.Find(1)!, ExpirationDate = DateOnly.FromDateTime(DateTime.Now.AddMonths(1)) },
+                //    new Product() { Name = "Ice cream", Price = 14.90f, Barcode = "4576856", Category = context.Categories.Find(5), Producer = context.Producers.Find(3)!, ExpirationDate = DateOnly.FromDateTime(DateTime.Now.AddDays(40)) }
 
-                );
+                //);
                 context.SaveChanges();
             }
         }
@@ -74,6 +74,7 @@ namespace Supermarket
         {
             InitializeComponent();
             _context = new DataContext();
+            Seed(_context);
             var user = _context.Users.SingleOrDefault(u => u.Username == "admin");
             if (user != null)
             {
@@ -83,7 +84,6 @@ namespace Supermarket
                 // Save the changes to the database
                 _context.SaveChanges();
             }
-            Seed(_context);
             NavigationService = new NavigationService(Frame, _context);
             Frame.Content = new StartPage();
         }

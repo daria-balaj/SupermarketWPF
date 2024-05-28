@@ -26,7 +26,7 @@ namespace Supermarket.ViewModels
             get { return currentUser; }
             set
             {
-                CurrentUser = value;
+                currentUser = value;
                 OnPropertyChanged(nameof(currentUser));
             }
         }

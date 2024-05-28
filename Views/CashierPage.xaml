@@ -52,7 +52,7 @@
     </Page.Resources>
     
     <Grid>
-        <StackPanel Orientation="Vertical" HorizontalAlignment="Left" Width="650" Margin="80 0 0 0">
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top" Width="650" Margin="80 -50 0 0">
             <Label Foreground="white" Margin="30 90 0 0" Height="40" VerticalAlignment="Top" FontSize="30">Search for products by:</Label>
             <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Height="350" Margin="0 10 0 0" >
                 <Grid.RowDefinitions>
@@ -93,7 +93,7 @@
 
                 <!-- Row 4: Category -->
                 <Label Foreground="White" FontSize="26" Grid.Row="4" Grid.Column="0">Category</Label>
-                <ComboBox Width="150" Margin="5" ItemsSource="{Binding  ProductVM.Categories}" DisplayMemberPath="Name" SelectedItem="{Binding ProductVM.SearchCategory}" Grid.Row="4" Grid.Column="1"/>
+                <ComboBox Width="150" Margin="5" ItemsSource="{Binding  ProductVM.CategoryList}" DisplayMemberPath="Name" SelectedItem="{Binding ProductVM.SearchCategory}" Grid.Row="4" Grid.Column="1"/>
                 <Button Content="🔎" Width="50" Command="{Binding ProductVM.SearchByCategoryCommand}" CommandParameter="{Binding ProductVM.SearchCategory}" Margin="5" Grid.Row="4" Grid.Column="2"/>
 
                 <!-- Row 5: Expiration Date -->
@@ -116,7 +116,7 @@
             <Button Command="{Binding AddToReceiptCommand}" Content="Add Item" FontSize="30" Width="180" Height="70" Margin="0 30 0 0" ></Button>
 
         </StackPanel>
-        <StackPanel x:Name="rightSide" Orientation="Vertical" HorizontalAlignment="Right" Width="650px" Height="880px" Margin="0 30 90 0">
+        <StackPanel x:Name="rightSide" Orientation="Vertical" HorizontalAlignment="Right" Width="650px" Height="880px" Margin="90 5 0 0">
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Right" Background="White" Width="550px" Height="720px" Margin="50 30">
                     <!--<Button Content="New Receipt" Command="{Binding CreateNewReceiptCommand}" />-->
                     <Label Margin="0 30 0 20" HorizontalAlignment="Center" FontSize="40" FontWeight="Bold">MySupermarket</Label>
